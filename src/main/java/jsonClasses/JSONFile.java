@@ -139,6 +139,7 @@ public class JSONFile {
 
     public static void main (String args []){
         JSONFile.createCustomerFile();
+        JSONFile.createDriverFile();
     }
 }
 
