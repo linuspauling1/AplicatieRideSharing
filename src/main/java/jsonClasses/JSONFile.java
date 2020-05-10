@@ -148,9 +148,8 @@ public class JSONFile {
 
         byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
 
-        // This is the way a password should be encoded when checking the credentials
         return new String(hashedPassword, StandardCharsets.UTF_8)
-                .replace("\"", ""); //to be able to save in JSON format
+                .replace("\"", ""); 
     }
 
     private static MessageDigest getMessageDigest() {
@@ -175,10 +174,6 @@ public class JSONFile {
         return false;
     }
 
-    public static void main (String args []){
-        JSONFile.createCustomerFile();
-        JSONFile.createDriverFile();
-    }
 }
 
 
