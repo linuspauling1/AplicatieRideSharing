@@ -71,7 +71,4 @@ public class CustomerGUI {
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
     }
-    public static void main(String[] args) {
-        new CustomerGUI();
-    }
 }
