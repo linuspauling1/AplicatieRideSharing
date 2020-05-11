@@ -1,4 +1,4 @@
-package datStructures;
+package dataStructures;
 
 public class ComandaNepreluata {
 

@@ -1,4 +1,4 @@
-package datStructures;
+package dataStructures;
 
 public class Sofer extends User{
     private String numarInmatriculare;
