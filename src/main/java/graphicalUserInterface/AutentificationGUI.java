@@ -3,6 +3,8 @@ package graphicalUserInterface;
 import dataStructures.Client;
 import dataStructures.Sofer;
 import jsonClasses.JSONFile;
+import graphicalUserInterface.customerPage.*;
+import graphicalUserInterface.driverPage.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -48,10 +50,12 @@ public class AutentificationGUI  {
                 Sofer s=new Sofer(s1,s2);
                 if(e.getSource() == b) {
                     if(JSONFile.verificaCredentiale("src/customers.json",c)) {
-                        System.out.println("client");
+                        f.setVisible(false);
+                        new CustomerGUI();
                     }
                     else if(JSONFile.verificaCredentiale("src/drivers.json",s)) {
-                        System.out.println("sofer");
+                        f.setVisible(false);
+                        new DriverPage(s);
                     }
                     else
                         JOptionPane.showMessageDialog(new JFrame(),
@@ -92,6 +96,15 @@ public class AutentificationGUI  {
         });
         f.setSize(700,400);
         f.setLayout(null);
+        f.setVisible(true);
+    }
+
+    public void resetFields(){
+        t1.setText("");
+        t2.setText("");
+    }
+
+    public static void afiseaza(){
         f.setVisible(true);
     }
 
