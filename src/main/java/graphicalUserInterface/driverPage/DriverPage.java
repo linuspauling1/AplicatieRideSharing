@@ -5,6 +5,7 @@ import dataStructures.Sofer;
 
 import javax.swing.*;
 import graphicalUserInterface.AutentificationGUI;
+import jsonClasses.JSONEditProfile;
 
 import javax.imageio.ImageIO;
 import java.awt.event.ActionListener;
@@ -14,6 +15,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class DriverPage {
 
@@ -26,6 +29,14 @@ public class DriverPage {
 
     public DriverPage(Sofer s)
     {
+        ArrayList<Sofer> soferi= JSONEditProfile.getDriver();
+        Iterator<Sofer> it=soferi.iterator();
+        while(it.hasNext()) {
+            Sofer aux = it.next();
+            if (aux.getUsername().equals(s.getUsername())) {
+                sofer = aux;
+            }
+        }
         initialize();
     }
 

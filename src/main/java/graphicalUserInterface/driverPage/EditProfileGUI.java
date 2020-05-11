@@ -1,5 +1,7 @@
 package graphicalUserInterface.driverPage;
 import dataStructures.Sofer;
+import jsonClasses.JSONEditProfile;
+import jsonClasses.JSONFile;
 
 import javax.swing.*;
 import java.awt.*;
@@ -117,6 +119,28 @@ public class EditProfileGUI {
         btnSalveazaModificari.setBounds(260, 218, 147, 32);
         frame.getContentPane().add(btnSalveazaModificari);
 
+        btnSalveazaModificari.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(passwordField.getText().equals("")==false) {
+                    ArrayList<Sofer> soferi = JSONEditProfile.getDriver();
+                    soferi.remove(sofer);
+                    String nume, parola, CNP, masina, nr;
+                    nume = textField.getText();
+                    parola = passwordField.getText();
+                    CNP = cnp.getText();
+                    masina = car.getText();
+                    nr = nri.getText();
+                    Sofer sof = new Sofer(nume, JSONFile.encodePassword(nume, parola));
+                    sof.setNumarInmatriculare(nr);
+                    sof.setMasina(masina);
+                    sof.setCNP(CNP);
+                    soferi.add(sof);
+                    JSONEditProfile.writeDriver(soferi);
+                    frame.setVisible(false);
+                    new DriverPage(sof);
+                }
+            }
+        });
     }
 }
 
