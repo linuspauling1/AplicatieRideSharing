@@ -1,16 +1,23 @@
 package graphicalUserInterface;
 
-import java.awt.Color;
-import java.awt.Font;
+import dataStructures.Client;
+import dataStructures.Sofer;
+import jsonClasses.JSONFile;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import javax.swing.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class AutentificationGUI  {
     static JFrame f;
-    JLabel l1,l2,l3,l4;//labels
+    JLabel l1,l2,l3,l4,l5;//labels
     JButton b;//button
     JTextField t1;//camp nume
     JPasswordField t2;//camp parola
@@ -33,6 +40,37 @@ public class AutentificationGUI  {
         b.setBounds(450,270,110,30);//x axis, y axis, width, height
         l4.setBounds(100,50,500,30);
         l4.setFont(new Font("Arial", Font.ITALIC, 12));
+        b.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String s1 = t1.getText();
+                String s2 = t2.getText();
+                Client c=new Client(s1,s2);
+                Sofer s=new Sofer(s1,s2);
+                if(e.getSource() == b) {
+                    if(JSONFile.verificaCredentiale("src/customers.json",c)) {
+                        System.out.println("client");
+                    }
+                    else if(JSONFile.verificaCredentiale("src/drivers.json",s)) {
+                        System.out.println("sofer");
+                    }
+                    else
+                        JOptionPane.showMessageDialog(new JFrame(),
+                                "Nu sunteti inregistrat.",
+                                "Persoana neautentificata",
+                                JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        });
+        BufferedImage img = null;
+        try {
+            img = ImageIO.read(new File("src/drive.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Image dimg = img.getScaledInstance(250, 250,Image.SCALE_SMOOTH);
+        ImageIcon icon = new ImageIcon(dimg);
+        l5 = new JLabel(icon);
+        l5.setBounds(80, 80, 250, 250);
         f.add(l3);
         f.add(t1);
         f.add(t2);
@@ -40,6 +78,7 @@ public class AutentificationGUI  {
         f.add(l2);
         f.add(b);
         f.add(l4);
+        f.add(l5);
         f.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
