@@ -78,6 +78,12 @@ public class DriverPage {
         gc.gridy=0;
         gc.anchor=GridBagConstraints.PAGE_START;
         jp.add(edit,gc);
+        edit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new EditProfileGUI(sofer);
+            }
+        });
 
         gc.insets=new Insets(5,5,25,5);
         gc.gridx=0;
