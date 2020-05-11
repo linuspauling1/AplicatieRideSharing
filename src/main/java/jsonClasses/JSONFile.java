@@ -1,6 +1,6 @@
 package jsonClasses;
 
-import datStructures.User;
+import dataStructures.User;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;

@@ -1,8 +1,8 @@
 package graphicalUserInterface.driverPage;
 
 import java.awt.*;
-import datStructures.Sofer;
-import jsonClasses.JSONFile;
+import dataStructures.Sofer;
+
 import javax.swing.*;
 import graphicalUserInterface.AutentificationGUI;
 
@@ -14,8 +14,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class DriverPage {
 

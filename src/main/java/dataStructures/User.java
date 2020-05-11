@@ -1,4 +1,4 @@
-package datStructures;
+package dataStructures;
 
 import javax.swing.*;
 import java.awt.*;
