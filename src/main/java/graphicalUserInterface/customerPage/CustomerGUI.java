@@ -1,6 +1,7 @@
 package graphicalUserInterface.customerPage;
 
 import dataStructures.Client;
+import graphicalUserInterface.AutentificationGUI;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -36,6 +37,7 @@ public class CustomerGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
+                new AutentificationGUI();
             }
         });
         BufferedImage img = null;
