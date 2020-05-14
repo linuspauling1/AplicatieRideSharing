@@ -8,6 +8,8 @@ public class ComandaNepreluata {
     protected int zi;
     protected int ora;
     protected int minut;
+    private String locatie;
+    private String destinatie;
 
     public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
         this.client = client;
@@ -74,5 +76,20 @@ public class ComandaNepreluata {
         this.minut = minut;
     }
 
+    public String getLocatie() {
+        return locatie;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public String getDestinatie() {
+        return destinatie;
+    }
+
+    public void setDestinatie(String destinatie) {
+        this.destinatie = destinatie;
+    }
 }
 

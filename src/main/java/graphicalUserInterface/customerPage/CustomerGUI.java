@@ -16,10 +16,12 @@ import java.io.IOException;
 
 
 public class CustomerGUI {
+    private Client client;
     private JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
-    public CustomerGUI(){
+    public CustomerGUI(Client c){
+        client=c;
         f = new JFrame("Customer's page");
         b1 = new JButton("Comenzile mele");
         b2 = new JButton("Comanda noua");
@@ -57,6 +59,12 @@ public class CustomerGUI {
         f.add(b2);
         f.add(b3);
         f.add(b4);
+        b2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(false);
+                new ComandaNoua(client);
+            }
+        });
         f.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

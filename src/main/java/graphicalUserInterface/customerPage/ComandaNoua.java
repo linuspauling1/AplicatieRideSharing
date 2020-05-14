@@ -1,5 +1,9 @@
 package graphicalUserInterface.customerPage;
+import dataStructures.Client;
+
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
@@ -10,12 +14,13 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class ComandaNoua {
-
+    private Client client;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public ComandaNoua() {
+	public ComandaNoua(Client c) {
+		client=c;
 		initialize();
 	}
 
@@ -79,8 +84,21 @@ public class ComandaNoua {
 		JButton btnContinuare = new JButton("Continuare");
 		btnContinuare.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnContinuare.setBounds(438, 196, 132, 21);
+		JButton btnInapoi = new JButton("Inapoi");
+		btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 16));
+		btnInapoi.setBounds(438, 236, 132, 21);
+
+		btnInapoi.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				new CustomerGUI(client);
+			}
+		});
+		frame.getContentPane().add(btnInapoi);
 		frame.getContentPane().add(btnContinuare);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
 	}
 }

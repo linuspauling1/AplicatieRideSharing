@@ -51,7 +51,7 @@ public class AutentificationGUI  {
                 if(e.getSource() == b) {
                     if(JSONFile.verificaCredentiale("src/customers.json",c)) {
                         f.setVisible(false);
-                        new CustomerGUI();
+                        new CustomerGUI(c);
                     }
                     else if(JSONFile.verificaCredentiale("src/drivers.json",s)) {
                         f.setVisible(false);
