@@ -1,5 +1,7 @@
 package graphicalUserInterface.customerPage;
+
 import dataStructures.Client;
+import dataStructures.ComandaNepreluata;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,12 +13,17 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ComandaNoua {
-    private Client client;
+	private Client client;
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private String locatie;
+	private String destinatie;
+	private static ArrayList<ComandaNepreluata> c = new ArrayList<ComandaNepreluata>();
 
 	public ComandaNoua(Client c) {
 		client=c;
@@ -27,7 +34,7 @@ public class ComandaNoua {
 		frame = new JFrame();
 		frame.getContentPane().setBackground(new Color(153, 204, 204));
 		frame.getContentPane().setLayout(null);
-        frame.setVisible(true);
+		frame.setVisible(true);
 		JLabel lblComandaNoua = new JLabel("Comanda Noua");
 		lblComandaNoua.setForeground(Color.BLUE);
 		lblComandaNoua.setFont(new Font("Times New Roman", Font.BOLD, 20));
@@ -90,7 +97,23 @@ public class ComandaNoua {
 		btnInapoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				new CustomerGUI(client);
+				CustomerGUI.afiseaza();
+			}
+		});
+		btnContinuare.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int an = Calendar.getInstance().get(Calendar.YEAR);
+				int luna = Calendar.getInstance().get(Calendar.MONTH);
+				int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+				int ora = Calendar.getInstance().get(Calendar.HOUR);
+				int minut = Calendar.getInstance().get(Calendar.MINUTE);
+				locatie = textField.getText();
+				destinatie = textField_1.getText();
+				ComandaNepreluata cn = new ComandaNepreluata(client,an,luna,zi,ora,minut,locatie,destinatie);
+				c.add(cn);
+				DOM.Parser.createXML(c);
+				frame.setVisible(false);
+				new CommandGUI();
 			}
 		});
 		frame.getContentPane().add(btnInapoi);
@@ -99,9 +122,5 @@ public class ComandaNoua {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-	}
-
-	public static void main(String[] args) {
-		new ComandaNoua(null);
 	}
 }

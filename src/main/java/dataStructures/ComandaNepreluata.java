@@ -11,6 +11,17 @@ public class ComandaNepreluata {
     private String locatie;
     private String destinatie;
 
+    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut,String locatie,String destinatie) {
+        this.client = client;
+        setAn(an);
+        setLuna(luna);
+        setZi(zi);
+        setOra(ora);
+        setMinut(minut);
+        setLocatie(locatie);
+        setDestinatie(destinatie);
+    }
+
     public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
         this.client = client;
         setAn(an);

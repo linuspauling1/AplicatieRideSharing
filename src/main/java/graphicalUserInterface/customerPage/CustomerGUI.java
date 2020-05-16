@@ -17,9 +17,14 @@ import java.io.IOException;
 
 public class CustomerGUI {
     private Client client;
-    private JFrame f;
+    private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
+
+    public static void afiseaza(){
+        f.setVisible(true);
+    }
+
     public CustomerGUI(Client c){
         client=c;
         f = new JFrame("Customer's page");
@@ -39,7 +44,7 @@ public class CustomerGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new AutentificationGUI();
+                AutentificationGUI.afiseaza();
             }
         });
         BufferedImage img = null;
