@@ -1,6 +1,8 @@
 package DOM;
 
+import dataStructures.Client;
 import dataStructures.ComandaNepreluata;
+import graphicalUserInterface.driverPage.ListaComenzi;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -22,8 +24,10 @@ public class Parser {
     private static Document doc;
     private static DocumentBuilder builder;
     private static Element element;
+    private static ArrayList<ComandaNepreluata> comenzi;
 
     public static void citireInformatiiXML() {
+        comenzi = new ArrayList<>();
         File inputFile = new File("C:\\XML\\data.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
@@ -37,22 +41,57 @@ public class Parser {
                 if(nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     NodeList lList = eElement.getChildNodes();
+                    Client cl = null;
+                    String destinatie = "";
+                    String loc = "";
+                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0;
                     for(int j = 0;j < lList.getLength();++j) {
                         Node cChild = lList.item(j);
                         if(cChild.getNodeName() != "data") {
-                            System.out.println(cChild.getNodeName() + " " + cChild.getTextContent());
+                            switch(cChild.getNodeName()){
+                                case "userClient":
+                                    cl = jsonClasses.JSONClient.findClient(cChild.getTextContent());
+                                    break;
+                                case "destinatie":
+                                    destinatie = cChild.getTextContent();
+                                    break;
+                                case "loc":
+                                    loc = cChild.getTextContent();
+                                    break;
+                                default:
+                                    System.out.println("ceva lipseste!");
+                            }
 
                         }
                         else {
                             NodeList sublist = cChild.getChildNodes();
-                            System.out.println(cChild.getNodeName());
                             for(int k = 0;k < sublist.getLength();++k) {
                                 Node subchild = sublist.item(k);
-                                System.out.println(subchild.getNodeName() + " " + subchild.getTextContent());
+                                switch (subchild.getNodeName()) {
+                                    case "an":
+                                        an = Integer.parseInt(subchild.getTextContent());
+                                        break;
+                                    case "luna":
+                                        luna = Integer.parseInt(subchild.getTextContent());
+                                        break;
+                                    case "zi":
+                                        zi = Integer.parseInt(subchild.getTextContent());
+                                        break;
+                                    case "ora":
+                                        ora = Integer.parseInt(subchild.getTextContent());
+                                        break;
+                                    case "minut":
+                                        minut = Integer.parseInt(subchild.getTextContent());
+                                        break;
+                                    default:
+                                        System.out.println("ciudat");
+                                }
                             }
-                            System.out.println("");
                         }
                     }
+                    ComandaNepreluata cn = new ComandaNepreluata(cl,an,luna,zi,ora,minut,loc,destinatie);
+                    comenzi.add(cn);
+                    new ListaComenzi(comenzi);
                 }
             }
         } catch (ParserConfigurationException e) {
@@ -180,4 +219,3 @@ public class Parser {
         }
     }
 }
-

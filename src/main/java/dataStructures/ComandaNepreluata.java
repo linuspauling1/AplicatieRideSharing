@@ -102,5 +102,8 @@ public class ComandaNepreluata {
     public void setDestinatie(String destinatie) {
         this.destinatie = destinatie;
     }
-}
 
+    public String toString(){
+        return client.toString() + ", de la: " + locatie + ", pentru: " + destinatie;
+    }
+}
