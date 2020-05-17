@@ -1,26 +1,25 @@
 package graphicalUserInterface.driverPage;
 
-import java.awt.*;
 import dataStructures.Sofer;
-
-import javax.swing.*;
 import graphicalUserInterface.AutentificationGUI;
 import jsonClasses.JSONEditProfile;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class DriverPage {
 
-    private JFrame frame;
+    private static JFrame frame;
     private Sofer sofer;
     private JButton edit;
     private JButton list;
@@ -38,6 +37,10 @@ public class DriverPage {
             }
         }
         initialize();
+    }
+
+    public static void afiseaza(){
+        frame.setVisible(true);
     }
 
     private void initialize() {
@@ -66,6 +69,14 @@ public class DriverPage {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
                 new AutentificationGUI();
+            }
+        });
+
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                DOM.Parser.citireInformatiiXML();
             }
         });
 
