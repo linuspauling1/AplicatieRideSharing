@@ -76,7 +76,7 @@ public class DriverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                DOM.Parser.citireInformatiiXML();
+                DOM.Parser.afisareXML();
             }
         });
 

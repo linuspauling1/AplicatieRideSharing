@@ -28,7 +28,7 @@ public class Parser {
 
     public static void citireInformatiiXML() {
         comenzi = new ArrayList<>();
-        File inputFile = new File("C:\\XML\\data.xml");
+        File inputFile = new File("src/data.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -91,7 +91,6 @@ public class Parser {
                     }
                     ComandaNepreluata cn = new ComandaNepreluata(cl,an,luna,zi,ora,minut,loc,destinatie);
                     comenzi.add(cn);
-                    new ListaComenzi(comenzi);
                 }
             }
         } catch (ParserConfigurationException e) {
@@ -104,6 +103,11 @@ public class Parser {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }
+
+    public static void afisareXML(){
+        citireInformatiiXML();
+        new ListaComenzi(comenzi);
     }
 
     public static void adaugareInformatiiXML(ComandaNepreluata c) {
@@ -189,7 +193,7 @@ public class Parser {
         }
     }
 
-    public static void createXML(ArrayList<ComandaNepreluata> c) {// creare fisier XML
+    public static void createXML(ComandaNepreluata c) {// creare fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -198,14 +202,16 @@ public class Parser {
             element = doc.createElement("comenzi");
             doc.appendChild(element);
 
-            for(ComandaNepreluata tmp:c)
+            citireInformatiiXML();
+            for(ComandaNepreluata tmp:comenzi)
                 adaugareInformatiiXML(tmp);
+            adaugareInformatiiXML(c);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult(new File("C:\\XML\\data.xml"));
+            StreamResult streamResult = new StreamResult("src/data.xml");
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
