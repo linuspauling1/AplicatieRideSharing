@@ -61,7 +61,7 @@ public class DriverPage {
         frame.getContentPane().setLayout(new BorderLayout(20, 20));
         frame.setVisible(true);
 
-        edit=new JButton("Editare comanda");
+        edit=new JButton("Editare profil");
         list=new JButton("  Comenzile mele");
         add=new JButton("Preia o comanda");
         inapoi=new JButton("   Inapoi      ");

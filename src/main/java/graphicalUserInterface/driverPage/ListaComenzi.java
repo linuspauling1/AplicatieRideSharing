@@ -1,6 +1,7 @@
 package graphicalUserInterface.driverPage;
 
 import dataStructures.ComandaNepreluata;
+import dataStructures.Sofer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,11 +14,13 @@ import java.util.ArrayList;
 public class ListaComenzi {
 
     private JFrame frame;
-
+    private JTextPane textPane;
+    private ArrayList<ComandaNepreluata> comandaNepreluata;
     /**
      * Create the application.
      */
     public ListaComenzi(ArrayList<ComandaNepreluata> cn) {
+        comandaNepreluata=cn;
         initialize(cn);
     }
 
@@ -57,14 +60,21 @@ public class ListaComenzi {
         list.setBackground(new Color(0, 153, 153));
         scrollPane.setViewportView(list);
 
-        JTextPane textPane = new JTextPane();
+        textPane = new JTextPane();
         textPane.setBounds(391, 247, 30, 26);
         frame.getContentPane().add(textPane);
 
         JButton lblNewLabel = new JButton("Preluati comanda");
         lblNewLabel.setBounds(245, 239, 141, 34);
         frame.getContentPane().add(lblNewLabel);
-
+        lblNewLabel.addActionListener(new ActionListener(){
+           public void actionPerformed(ActionEvent ev){
+               int number=Integer.parseInt(textPane.getText());
+               ComandaNepreluata c=comandaNepreluata.get(number-1);
+               new InfoClient(c);
+               frame.setVisible(false);
+            }
+        });
         JButton btnInapoi = new JButton("Inapoi");
         btnInapoi.setBounds(255, 289, 115, 29);
         frame.getContentPane().add(btnInapoi);
