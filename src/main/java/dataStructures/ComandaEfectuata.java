@@ -29,6 +29,8 @@ public class ComandaEfectuata extends ComandaNepreluata {
     }
 
     public String getUsernameSofer() {
+        if(sofer == null)
+            return "";
         return sofer.getUsername();
     }
 

@@ -71,27 +71,20 @@ public class ListaComenzi {
         lblNewLabel.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent ev){
                int number=Integer.parseInt(textPane.getText());
-               ComandaNepreluata comanda = comandaNepreluata.get(number-1);
-               ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
-                       comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
-                       comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),0,0);
-               Parser.createXMLEfectuate(ce);
-               Parser.delete(comanda);
-               new InfoClient(comanda);
-               frame.setVisible(false);
-            }
-        });
-        /*btnTerminareComanda.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
-                        comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
-                        comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),0,0);
-                Parser.createXMLEfectuate(ce);
-                Parser.delete(comanda);
-                new InfoCalatorie();
-                frame.setVisible(false);
-            }
-        });*/
+               try{
+                   ComandaNepreluata comanda = comandaNepreluata.get(number - 1);
+                   ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
+                           comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
+                           comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),0,0);
+                   Parser.createXMLEfectuate(ce);
+                   Parser.delete(comanda);
+                   new InfoClient(comanda);
+                   frame.setVisible(false);
+               }catch (IndexOutOfBoundsException e){
+                   JOptionPane.showMessageDialog(frame, "Index ilegal!Reintroduceti numarul.");
+               }
+        }});
+
         JButton btnInapoi = new JButton("Inapoi");
         btnInapoi.setBounds(255, 289, 115, 29);
         frame.getContentPane().add(btnInapoi);
