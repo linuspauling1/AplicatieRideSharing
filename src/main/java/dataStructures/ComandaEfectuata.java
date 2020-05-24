@@ -5,8 +5,8 @@ public class ComandaEfectuata extends ComandaNepreluata {
     private int distanta;
     private Sofer sofer;
 
-    public ComandaEfectuata(Client client, int an, int luna, int zi, int ora, int minut,Sofer sofer,int pret,int distanta) {
-        super(client, an, luna, zi, ora, minut);
+    public ComandaEfectuata(Client client, int an, int luna, int zi, int ora, int minut,String locatie,String destinatie,Sofer sofer,int pret,int distanta) {
+        super(client, an, luna, zi, ora, minut,locatie,destinatie);
         this.sofer = sofer;
         setPret(pret);
         setDistanta(distanta);

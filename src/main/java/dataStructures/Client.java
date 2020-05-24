@@ -20,9 +20,6 @@ public class Client extends User{
     }
     @Override
     public String toString() {
-        return "Client{" +
-                "Adresa='" + Adresa + '\'' +
-                ", telefon='" + telefon + '\'' +
-                '}';
+        return "Client { " + username + " } ";
     }
 }

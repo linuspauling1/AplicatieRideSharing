@@ -22,14 +22,14 @@ public class ComandaNepreluata {
         setDestinatie(destinatie);
     }
 
-    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
+    /*public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
         this.client = client;
         setAn(an);
         setLuna(luna);
         setZi(zi);
         setOra(ora);
         setMinut(minut);
-    }
+    }*/
 
     public String getAdresa() {
         return client.getAdresa();
@@ -103,7 +103,22 @@ public class ComandaNepreluata {
         this.destinatie = destinatie;
     }
 
+    public Client getClient(){
+        return client;
+    }
+
     public String toString(){
         return client.toString() + ", de la: " + locatie + ", pentru: " + destinatie;
+    }
+
+    public boolean equals(Object o){
+        if(o instanceof  ComandaNepreluata){
+            ComandaNepreluata cn = (ComandaNepreluata) o;
+            if(this.toString().equals(cn.toString()))
+                return true;
+            return false;
+        }
+        else
+            return false;
     }
 }

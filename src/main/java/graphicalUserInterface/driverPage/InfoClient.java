@@ -1,23 +1,22 @@
 package graphicalUserInterface.driverPage;
+
+import DOM.Parser;
 import dataStructures.Client;
+import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
-import dataStructures.Sofer;
 import jsonClasses.JSONClient;
 
-import java.awt.EventQueue;
-
 import javax.swing.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 public class InfoClient {
-    private JFrame frame;
+    private static JFrame frame;
     private ComandaNepreluata comanda;
     private Client client;
     public InfoClient(ComandaNepreluata c) {
@@ -38,6 +37,10 @@ public class InfoClient {
                 client=c;
             }
         }
+    }
+
+    public static void afisare(){
+        frame.setVisible(true);
     }
 
     private void initialize() {
@@ -106,7 +109,15 @@ public class InfoClient {
         JButton btnTerminareComanda = new JButton("Terminare comanda");
         btnTerminareComanda.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                int distanta = (int)(Math.random()*5 + 1);
+                ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
+                        comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
+                        comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),distanta * 3,
+                        distanta);
+                Parser.deleteEfectuate(ce);
+                Parser.createXMLEfectuate(ce);
+                frame.setVisible(false);
+                new InfoCalatorie(distanta);
             }
         });
         btnTerminareComanda.setFont(new Font("Times New Roman", Font.BOLD, 16));

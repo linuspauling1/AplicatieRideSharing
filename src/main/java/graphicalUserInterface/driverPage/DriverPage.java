@@ -20,11 +20,15 @@ import java.util.Iterator;
 public class DriverPage {
 
     private static JFrame frame;
-    private Sofer sofer;
+    private static Sofer sofer;
     private JButton edit;
     private JButton list;
     private JButton add;
     private JButton inapoi;
+
+    public static Sofer getSofer(){
+        return sofer;
+    }
 
     public DriverPage(Sofer s)
     {

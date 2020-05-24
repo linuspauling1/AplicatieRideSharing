@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 public abstract class User {
-    private String username;
-    private String password;
-    private String CNP;
+    protected String username;
+    protected String password;
+    protected String CNP;
     public User(String username,String password) {
         this.username = username;
         this.password = password;
@@ -54,5 +54,3 @@ public abstract class User {
                 '}';
     }
 }
-
-
