@@ -107,9 +107,10 @@ public class ComandaNoua {
 				int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 				int ora = Calendar.getInstance().get(Calendar.HOUR);
 				int minut = Calendar.getInstance().get(Calendar.MINUTE);
+				int secunda = Calendar.getInstance().get(Calendar.SECOND);
 				locatie = textField.getText();
 				destinatie = textField_1.getText();
-				ComandaNepreluata cn = new ComandaNepreluata(client,an,luna,zi,ora,minut,locatie,destinatie);
+				ComandaNepreluata cn = new ComandaNepreluata(client,an,luna,zi,ora,minut,secunda,locatie,destinatie);
 				c.add(cn);
 				DOM.Parser.createXML(cn);
 				frame.setVisible(false);

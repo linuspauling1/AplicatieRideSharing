@@ -75,7 +75,8 @@ public class ListaComenzi {
                    ComandaNepreluata comanda = comandaNepreluata.get(number - 1);
                    ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
                            comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
-                           comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),0,0);
+                           comanda.getSecunda(),comanda.getLocatie(),comanda.getDestinatie(),
+                           DriverPage.getSofer(),0,0);
                    Parser.createXMLEfectuate(ce);
                    Parser.delete(comanda);
                    new InfoClient(comanda);

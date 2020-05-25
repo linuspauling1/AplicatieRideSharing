@@ -112,8 +112,8 @@ public class InfoClient {
                 int distanta = (int)(Math.random()*5 + 1);
                 ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
                         comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
-                        comanda.getLocatie(),comanda.getDestinatie(),DriverPage.getSofer(),distanta * 3,
-                        distanta);
+                        comanda.getSecunda(),comanda.getLocatie(),comanda.getDestinatie(),
+                        DriverPage.getSofer(), distanta * 3, distanta);
                 Parser.deleteEfectuate(ce);
                 Parser.createXMLEfectuate(ce);
                 frame.setVisible(false);

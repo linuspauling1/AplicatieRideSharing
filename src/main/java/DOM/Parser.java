@@ -48,7 +48,7 @@ public class Parser {
                     Client cl = null;
                     String destinatie = "";
                     String loc = "";
-                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0;
+                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0,secunda = 0;
                     for(int j = 0;j < lList.getLength();++j) {
                         Node cChild = lList.item(j);
                         if(cChild.getNodeName() != "data") {
@@ -87,13 +87,16 @@ public class Parser {
                                     case "minut":
                                         minut = Integer.parseInt(subchild.getTextContent());
                                         break;
+                                    case "secunda":
+                                        secunda = Integer.parseInt(subchild.getTextContent());
+                                        break;
                                     default:
                                         System.out.println("ciudat");
                                 }
                             }
                         }
                     }
-                    ComandaNepreluata cn = new ComandaNepreluata(cl,an,luna,zi,ora,minut,loc,destinatie);
+                    ComandaNepreluata cn = new ComandaNepreluata(cl,an,luna,zi,ora,minut,secunda,loc,destinatie);
                     comenzi.add(cn);
                 }
             }
@@ -157,6 +160,10 @@ public class Parser {
         m.appendChild(doc.createTextNode(Integer.toString(c.getMinut())));
         data.appendChild(m);
 
+        Element s = doc.createElement("secunda");
+        s.appendChild(doc.createTextNode(Integer.toString(c.getSecunda())));
+        data.appendChild(s);
+
     }
 
     public static void citireInformatiiXMLEfectuate(){
@@ -180,7 +187,7 @@ public class Parser {
                     Sofer sofer = null;
                     int pret = 0;
                     int distanta = 0;
-                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0;
+                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0,secunda = 0;
                     for(int j = 0;j < lList.getLength();++j) {
                         Node cChild = lList.item(j);
                         if(cChild.getNodeName() != "data") {
@@ -228,13 +235,16 @@ public class Parser {
                                     case "minut":
                                         minut = Integer.parseInt(subchild.getTextContent());
                                         break;
+                                    case "secunda":
+                                        secunda = Integer.parseInt(subchild.getTextContent());
+                                        break;
                                     default:
                                         System.out.println("ciudat");
                                 }
                             }
                         }
                     }
-                    ComandaEfectuata ce = new ComandaEfectuata(cl,an,luna,zi,ora,minut,loc,destinatie,
+                    ComandaEfectuata ce = new ComandaEfectuata(cl,an,luna,zi,ora,minut,secunda,loc,destinatie,
                             sofer,pret,distanta);
                     efectuate.add(ce);
                 }
@@ -293,6 +303,10 @@ public class Parser {
         Element m = doc.createElement("minut");
         m.appendChild(doc.createTextNode(Integer.toString(c.getMinut())));
         data.appendChild(m);
+
+        Element s = doc.createElement("secunda");
+        s.appendChild(doc.createTextNode(Integer.toString(c.getSecunda())));
+        data.appendChild(s);
 
         Element pret = doc.createElement("pret");
         pret.appendChild(doc.createTextNode(Integer.toString(c.getPret())));
@@ -415,7 +429,7 @@ public class Parser {
             citireInformatiiXMLEfectuate();
             for(ComandaEfectuata tmp:efectuate)
                 if(tmp.getPret() != 0)
-                    adaugareInformatiiXML(tmp);
+                    adaugareInformatiiXMLEfectuate(tmp);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

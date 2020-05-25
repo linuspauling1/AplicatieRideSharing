@@ -8,28 +8,22 @@ public class ComandaNepreluata {
     protected int zi;
     protected int ora;
     protected int minut;
-    private String locatie;
-    private String destinatie;
 
-    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut,String locatie,String destinatie) {
+    protected int secunda;
+    protected String locatie;
+    protected String destinatie;
+
+    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut,int secunda,String locatie,String destinatie) {
         this.client = client;
         setAn(an);
         setLuna(luna);
         setZi(zi);
         setOra(ora);
         setMinut(minut);
+        setSecunda(secunda);
         setLocatie(locatie);
         setDestinatie(destinatie);
     }
-
-    /*public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
-        this.client = client;
-        setAn(an);
-        setLuna(luna);
-        setZi(zi);
-        setOra(ora);
-        setMinut(minut);
-    }*/
 
     public String getAdresa() {
         return client.getAdresa();
@@ -85,6 +79,15 @@ public class ComandaNepreluata {
 
     private void setMinut(int minut) {
         this.minut = minut;
+    }
+
+
+    public int getSecunda() {
+        return secunda;
+    }
+
+    private void setSecunda(int secunda) {
+        this.secunda = secunda;
     }
 
     public String getLocatie() {
