@@ -26,7 +26,7 @@ public class JSONEditProfile {
             list.add(obj1);
         }
         try {
-            FileWriter file = new FileWriter("src/drivers.json");
+            FileWriter file = new FileWriter("src/main/resources/drivers.json");
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {
@@ -34,7 +34,7 @@ public class JSONEditProfile {
         }
     }
     public static ArrayList<Sofer> getDriver(){
-        JSONArray list=JSONFile.readFromFiles("src/drivers.json");
+        JSONArray list=JSONFile.readFromFiles("src/main/resources/drivers.json");
         ArrayList<Sofer> soferi=new ArrayList<Sofer>();
         Iterator<JSONObject> it=list.iterator();
         while(it.hasNext()) {

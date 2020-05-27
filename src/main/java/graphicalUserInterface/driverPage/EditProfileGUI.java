@@ -130,7 +130,7 @@ public class EditProfileGUI {
                     CNP = cnp.getText();
                     masina = car.getText();
                     nr = nri.getText();
-                    Sofer sof = new Sofer(nume, JSONFile.encodePassword(nume, parola));
+                    Sofer sof = new Sofer(nume, JSONFile.encrypt(parola));
                     sof.setNumarInmatriculare(nr);
                     sof.setMasina(masina);
                     sof.setCNP(CNP);

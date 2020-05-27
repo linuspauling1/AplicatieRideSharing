@@ -1,5 +1,6 @@
 package graphicalUserInterface.driverPage;
 
+import dataStructures.ComandaEfectuata;
 import dataStructures.Sofer;
 import graphicalUserInterface.AutentificationGUI;
 import jsonClasses.JSONEditProfile;
@@ -80,7 +81,21 @@ public class DriverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                DOM.Parser.afisareXML();
+                ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate();
+                Iterator<ComandaEfectuata> it=ef.iterator();
+                boolean c=false;
+                while(it.hasNext()){
+                    ComandaEfectuata com=it.next();
+                    if(com.getUsernameSofer().equals(sofer.getUsername())&&com.getPret()==0){
+                        c=true;
+                        frame.setVisible(false);
+                        new InfoClient(com);
+                    }
+                }
+                if(c==false){
+                    frame.setVisible(false);
+                    DOM.Parser.afisareXML();
+                }
             }
         });
 
@@ -135,7 +150,7 @@ public class DriverPage {
         gcw.insets=new Insets(15,5,5,5);
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/drive.jpg"));
+            img = ImageIO.read(new File("src/main/resources/drive.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }

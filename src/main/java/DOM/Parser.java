@@ -32,7 +32,7 @@ public class Parser {
 
     public static void citireInformatiiXML() {
         comenzi = new ArrayList<>();
-        File inputFile = new File("src/data.xml");
+        File inputFile = new File("src/main/resources/data.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -166,9 +166,14 @@ public class Parser {
 
     }
 
+    public static ArrayList<ComandaEfectuata> getEfectuate(){
+        citireInformatiiXMLEfectuate();
+        return efectuate;
+    }
+
     public static void citireInformatiiXMLEfectuate(){
         efectuate = new ArrayList<>();
-        File inputFile = new File("src/completed.xml");
+        File inputFile = new File("src/main/resources/completed.xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -340,7 +345,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/data.xml");
+            StreamResult streamResult = new StreamResult("src/main/resources/data.xml");
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -372,7 +377,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/completed.xml");
+            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -404,7 +409,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/data.xml");
+            StreamResult streamResult = new StreamResult("src/main/resources/data.xml");
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -435,7 +440,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/completed.xml");
+            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block

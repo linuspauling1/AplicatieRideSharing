@@ -47,7 +47,7 @@ public class InfoCalatorie {
         btnNewButton.setBounds(152, 184, 115, 29);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                InfoClient.afisare();
+                DriverPage.afiseaza();
                 frmInfoCursa.setVisible(false);
             }
         });

@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 public class JSONClient {
     public static ArrayList<Client> getClient(){
-        JSONArray list=JSONFile.readFromFiles("src/customers.json");
+        JSONArray list=JSONFile.readFromFiles("src/main/resources/customers.json");
         ArrayList<Client> clienti = new ArrayList<Client>();
         Iterator<JSONObject> it = list.iterator();
         while(it.hasNext()) {

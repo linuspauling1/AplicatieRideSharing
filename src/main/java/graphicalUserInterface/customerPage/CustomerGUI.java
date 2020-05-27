@@ -49,7 +49,7 @@ public class CustomerGUI {
         });
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/drive.jpg"));
+            img = ImageIO.read(new File("src/main/resources/drive.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
