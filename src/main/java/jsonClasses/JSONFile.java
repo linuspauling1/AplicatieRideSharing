@@ -7,16 +7,36 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import org.apache.commons.codec.binary.Base64;
+import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
+import java.io.*;
+import java.security.spec.KeySpec;
 import java.util.Iterator;
 
 public class JSONFile {
+    private static final String UNICODE_FORMAT = "UTF8";
+    public static final String DESEDE_ENCRYPTION_SCHEME = "DESede";
+    private KeySpec ks;
+    private SecretKeyFactory skf;
+    private static Cipher cipher;
+    byte[] arrayBytes;
+    private String myEncryptionKey;
+    private String myEncryptionScheme;
+    private static SecretKey key;
+
+    public JSONFile()throws Exception{
+        myEncryptionKey = "PROIECT-FIS--FIS-PROIECT";
+        myEncryptionScheme = DESEDE_ENCRYPTION_SCHEME;
+        arrayBytes = myEncryptionKey.getBytes(UNICODE_FORMAT);
+        ks = new DESedeKeySpec(arrayBytes);
+        skf = SecretKeyFactory.getInstance(myEncryptionScheme);
+        cipher = Cipher.getInstance(myEncryptionScheme);
+        key = skf.generateSecret(ks);
+    }
+
     public static JSONArray readFromFiles(String fileName){
         JSONParser parser=new JSONParser();
         JSONArray list=new JSONArray();
@@ -30,25 +50,31 @@ public class JSONFile {
         }
         return list;
     }
-
-    public static String encodePassword(String salt, String password) {
-        MessageDigest md = getMessageDigest();
-        md.update(salt.getBytes(StandardCharsets.UTF_8));
-
-        byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-
-        return new String(hashedPassword, StandardCharsets.UTF_8)
-                .replace("\"", ""); 
+    public static String encrypt(String unencryptedString) {
+        String encryptedString = null;
+        try {
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] plainText = unencryptedString.getBytes(UNICODE_FORMAT);
+            byte[] encryptedText = cipher.doFinal(plainText);
+            encryptedString = new String(Base64.encodeBase64(encryptedText));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return encryptedString;
     }
 
-    private static MessageDigest getMessageDigest() {
-        MessageDigest md;
+
+    public static String decrypt(String encryptedString) {
+        String decryptedText=null;
         try {
-            md = MessageDigest.getInstance("SHA-512");
-        } catch (NoSuchAlgorithmException e) {
-            throw new IllegalStateException("SHA-512 does not exist!");
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            byte[] encryptedText = Base64.decodeBase64(encryptedString);
+            byte[] plainText = cipher.doFinal(encryptedText);
+            decryptedText= new String(plainText);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return md;
+        return decryptedText;
     }
 
     public static boolean verificaCredentiale(String fileName, User u){
@@ -57,7 +83,7 @@ public class JSONFile {
         while(it.hasNext()){
             JSONObject obj=it.next();
             JSONObject objInt=(JSONObject)obj.get("customer :");
-            if(encodePassword(u.getUsername(),u.getPassword()).equals(objInt.get("password")))
+            if(objInt.get("username").equals(u.getUsername())&&decrypt((String)objInt.get("password")).equals(u.getPassword()))
                 return true;
         }
         return false;

@@ -2,9 +2,12 @@ package graphicalUserInterface;
 
 import dataStructures.Client;
 import dataStructures.Sofer;
+import jsonClasses.JSONCreate;
 import jsonClasses.JSONFile;
 import graphicalUserInterface.customerPage.*;
 import graphicalUserInterface.driverPage.*;
+import org.apache.commons.io.FileUtils;
+import services.FileSystemService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -16,9 +19,15 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class AutentificationGUI  {
     static JFrame f;
+    private static final Path DRIVERS_PATH = FileSystemService.getPathToFile("config", "drivers.json");
+    private static final Path COMENZI_PATH = FileSystemService.getPathToFile("config", "data.xml");
+    private static final Path COM_EFECT_PATH = FileSystemService.getPathToFile("config", "completed.xml");
+    private static final Path IMAGE_PATH = FileSystemService.getPathToFile("config", "drive.jpg");
     JLabel l1,l2,l3,l4,l5;//labels
     JButton b;//button
     JTextField t1;//camp nume
@@ -49,11 +58,11 @@ public class AutentificationGUI  {
                 Client c=new Client(s1,s2);
                 Sofer s=new Sofer(s1,s2);
                 if(e.getSource() == b) {
-                    if(JSONFile.verificaCredentiale("src/customers.json",c)) {
+                    if(JSONFile.verificaCredentiale("src/main/resources/customers.json",c)) {
                         f.setVisible(false);
-                        new CustomerGUI();
+                        new CustomerGUI(c);
                     }
-                    else if(JSONFile.verificaCredentiale("src/drivers.json",s)) {
+                    else if(JSONFile.verificaCredentiale("src/main/resources/drivers.json",s)) {
                         f.setVisible(false);
                         new DriverPage(s);
                     }
@@ -67,7 +76,7 @@ public class AutentificationGUI  {
         });
         BufferedImage img = null;
         try {
-            img = ImageIO.read(new File("src/drive.jpg"));
+            img = ImageIO.read(new File("src/main/resources/drive.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -108,7 +117,27 @@ public class AutentificationGUI  {
         f.setVisible(true);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
+        try {
+            new JSONFile();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        try {
+            if (!Files.exists(FileSystemService.getUser()))
+                FileUtils.copyURLToFile(AutentificationGUI.class.getClassLoader().getResource("customers.json"), FileSystemService.getUser().toFile());
+            if (!Files.exists(FileSystemService.getDrivers()))
+                FileUtils.copyURLToFile(AutentificationGUI.class.getClassLoader().getResource("drivers.json"), FileSystemService.getDrivers().toFile());
+            if (!Files.exists(FileSystemService.getPhoto()))
+                FileUtils.copyURLToFile(AutentificationGUI.class.getClassLoader().getResource("drive.jpg"), FileSystemService.getPhoto().toFile());
+            if (!Files.exists(FileSystemService.getComNep()))
+                FileUtils.copyURLToFile(AutentificationGUI.class.getClassLoader().getResource("data.xml"), FileSystemService.getComNep().toFile());
+            if (!Files.exists(FileSystemService.getComEf()))
+                FileUtils.copyURLToFile(AutentificationGUI.class.getClassLoader().getResource("completed.xml"), FileSystemService.getComEf().toFile());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new AutentificationGUI();

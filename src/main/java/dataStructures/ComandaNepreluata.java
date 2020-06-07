@@ -9,13 +9,20 @@ public class ComandaNepreluata {
     protected int ora;
     protected int minut;
 
-    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut) {
+    protected int secunda;
+    protected String locatie;
+    protected String destinatie;
+
+    public ComandaNepreluata(Client client,int an,int luna,int zi,int ora,int minut,int secunda,String locatie,String destinatie) {
         this.client = client;
         setAn(an);
         setLuna(luna);
         setZi(zi);
         setOra(ora);
         setMinut(minut);
+        setSecunda(secunda);
+        setLocatie(locatie);
+        setDestinatie(destinatie);
     }
 
     public String getAdresa() {
@@ -74,5 +81,47 @@ public class ComandaNepreluata {
         this.minut = minut;
     }
 
-}
 
+    public int getSecunda() {
+        return secunda;
+    }
+
+    private void setSecunda(int secunda) {
+        this.secunda = secunda;
+    }
+
+    public String getLocatie() {
+        return locatie;
+    }
+
+    public void setLocatie(String locatie) {
+        this.locatie = locatie;
+    }
+
+    public String getDestinatie() {
+        return destinatie;
+    }
+
+    public void setDestinatie(String destinatie) {
+        this.destinatie = destinatie;
+    }
+
+    public Client getClient(){
+        return client;
+    }
+
+    public String toString(){
+        return client.toString() + ", de la: " + locatie + ", pentru: " + destinatie;
+    }
+
+    public boolean equals(Object o){
+        if(o instanceof  ComandaNepreluata){
+            ComandaNepreluata cn = (ComandaNepreluata) o;
+            if(this.toString().equals(cn.toString()))
+                return true;
+            return false;
+        }
+        else
+            return false;
+    }
+}

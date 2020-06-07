@@ -7,10 +7,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONCreate {
-    private static void createCustomerFile() {
+    public static void createCustomerFile() {
         JSONObject obj1 = new JSONObject();
         obj1.put("username", "catalin");
-        obj1.put("password", JSONFile.encodePassword("catalin","botean"));
+        obj1.put("password", JSONFile.encrypt("botean"));
         obj1.put("CNP","1234567891012");
         obj1.put("Adresa","Lugoj");
         obj1.put("Telefon","0712345678");
@@ -19,7 +19,7 @@ public class JSONCreate {
 
         JSONObject obj2 = new JSONObject();
         obj2.put("username", "paul");
-        obj2.put("password", JSONFile.encodePassword("paul","banu"));
+        obj2.put("password", JSONFile.encrypt("banu"));
         obj2.put("CNP","1244567891012");
         obj2.put("Adresa","Timisoara");
         obj2.put("Telefon","0722345678");
@@ -28,7 +28,7 @@ public class JSONCreate {
 
         JSONObject obj3 = new JSONObject();
         obj3.put("username", "lidia");
-        obj3.put("password", JSONFile.encodePassword("lidia","szm"));
+        obj3.put("password", JSONFile.encrypt("szm"));
         obj3.put("CNP","1235567891012");
         obj3.put("Adresa","Lugoj");
         obj3.put("Telefon","0713345678");
@@ -37,7 +37,7 @@ public class JSONCreate {
 
         JSONObject obj4 = new JSONObject();
         obj4.put("username", "cosmin");
-        obj4.put("password", JSONFile.encodePassword("cosmin","marsavina"));
+        obj4.put("password", JSONFile.encrypt("marsavina"));
         obj4.put("CNP","1236567891012");
         obj4.put("Adresa","Timisoara");
         obj4.put("Telefon","0715345678");
@@ -46,7 +46,7 @@ public class JSONCreate {
 
         JSONObject obj5 = new JSONObject();
         obj5.put("username", "dana");
-        obj5.put("password", JSONFile.encodePassword("dana","bosoanca"));
+        obj5.put("password", JSONFile.encrypt("bosoanca"));
         obj5.put("CNP","1334567891012");
         obj5.put("Adresa","Orsova");
         obj5.put("Telefon","0792345678");
@@ -60,17 +60,17 @@ public class JSONCreate {
         list.add(obj9);
         list.add(obj10);
         try {
-            FileWriter file = new FileWriter("src/customers.json");
+            FileWriter file = new FileWriter("src/main/resources/customers.json");
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    private static void createDriverFile() {
+    public static void createDriverFile() {
         JSONObject obj1 = new JSONObject();
         obj1.put("username", "alex");
-        obj1.put("password", JSONFile.encodePassword("alex","borza"));
+        obj1.put("password", JSONFile.encrypt("borza"));
         obj1.put("CNP","1234577891012");
         obj1.put("NumarInmatriculare","TM10ABC");
         obj1.put("Masina", "Audi");
@@ -79,7 +79,7 @@ public class JSONCreate {
 
         JSONObject obj2 = new JSONObject();
         obj2.put("username", "andreea");
-        obj2.put("password", JSONFile.encodePassword("andreea","mihaela"));
+        obj2.put("password", JSONFile.encrypt("mihaela"));
         obj2.put("CNP","1234567881012");
         obj2.put("NumarInmatriculare","TM11ABC");
         obj2.put("Masina", "BMW");
@@ -88,7 +88,7 @@ public class JSONCreate {
 
         JSONObject obj3 = new JSONObject();
         obj3.put("username", "ion");
-        obj3.put("password", JSONFile.encodePassword("ion","popescu"));
+        obj3.put("password", JSONFile.encrypt("popescu"));
         obj3.put("CNP","1234567999012");
         obj3.put("NumarInmatriculare","TM12ABC");
         obj3.put("Masina", "Opel");
@@ -97,7 +97,7 @@ public class JSONCreate {
 
         JSONObject obj4 = new JSONObject();
         obj4.put("username", "adi");
-        obj4.put("password", JSONFile.encodePassword("adi","brisan"));
+        obj4.put("password", JSONFile.encrypt("brisan"));
         obj4.put("CNP","1234567791012");
         obj4.put("NumarInmatriculare","TM13ABC");
         obj4.put("Masina", "Mercedes");
@@ -111,11 +111,16 @@ public class JSONCreate {
         list.add(obj8);
         list.add(obj9);
         try {
-            FileWriter file = new FileWriter("src/drivers.json");
+            FileWriter file = new FileWriter("src/main/resources/drivers.json");
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    /*public static void main(String args[]) throws Exception {
+        new JSONFile();
+        createCustomerFile();
+        createDriverFile();
+    }*/
 }
