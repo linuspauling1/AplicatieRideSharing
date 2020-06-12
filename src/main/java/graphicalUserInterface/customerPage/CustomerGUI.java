@@ -38,6 +38,13 @@ public class CustomerGUI {
         });
         b2 = new JButton("Comanda noua");
         b3 = new JButton("Scrieti recenzie");
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(false);
+                new Review();
+            }
+        });
         b4 = new JButton("Inapoi");
         l1 = new JLabel("Customer's page");
         l1.setBounds(225, 0, 300, 50);

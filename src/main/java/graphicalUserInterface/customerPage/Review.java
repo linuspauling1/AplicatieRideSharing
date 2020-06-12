@@ -34,7 +34,9 @@ public class Review {
 
         JButton btnInapoi = new JButton("Inapoi");
         btnInapoi.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent arg0) {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                CustomerGUI.afiseaza();
             }
         });
         btnInapoi.setBounds(274, 299, 115, 29);
