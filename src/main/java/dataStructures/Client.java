@@ -22,4 +22,12 @@ public class Client extends User{
     public String toString() {
         return "Client { " + username + " } ";
     }
+    public boolean equals(Object o){
+        if(o instanceof Client){
+            Client tmp = (Client)o;
+            return tmp.username.equals(this.username);
+        }
+        else
+            return false;
+    }
 }

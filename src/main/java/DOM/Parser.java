@@ -6,6 +6,7 @@ import dataStructures.ComandaNepreluata;
 import dataStructures.Sofer;
 import graphicalUserInterface.driverPage.DriverPage;
 import graphicalUserInterface.driverPage.ListaComenzi;
+import jsonClasses.JSONEditProfile;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -214,6 +215,8 @@ public class Parser {
                                     break;
                                 case "sofer":
                                     sofer = DriverPage.getSofer();
+                                    if(sofer == null)
+                                        sofer = JSONEditProfile.getSofer(cChild.getTextContent());
                                     break;
                                 default:
                                     System.out.println("ceva lipseste!");

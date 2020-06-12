@@ -48,6 +48,13 @@ public class JSONEditProfile {
         }
         return soferi;
     }
+    public static Sofer getSofer(String user){
+        ArrayList<Sofer> listaSoferi = getDriver();
+        for(Sofer tmp: listaSoferi)
+            if(tmp.getUsername().equals(user))
+                return tmp;
+        return null;
+    }
 
 }
 

@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><comenzi/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><comenzi status="nepreluate"><comanda><userClient>catalin</userClient><destinatie>ab</destinatie><loc>hd</loc><data><an>2020</an><luna>5</luna><zi>12</zi><ora>1</ora><minut>59</minut><secunda>29</secunda></data></comanda><comanda><userClient>paul</userClient><destinatie>bb</destinatie><loc>aa</loc><data><an>2020</an><luna>5</luna><zi>12</zi><ora>2</ora><minut>7</minut><secunda>58</secunda></data></comanda></comenzi>
