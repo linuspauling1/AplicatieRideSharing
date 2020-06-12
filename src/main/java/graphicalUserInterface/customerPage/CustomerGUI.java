@@ -29,6 +29,13 @@ public class CustomerGUI {
         client=c;
         f = new JFrame("Customer's page");
         b1 = new JButton("Comenzile mele");
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                f.setVisible(false);
+                new ComenzileMele(c);
+            }
+        });
         b2 = new JButton("Comanda noua");
         b3 = new JButton("Scrieti recenzie");
         b4 = new JButton("Inapoi");
