@@ -70,4 +70,6 @@ public class ComandaEfectuata extends ComandaNepreluata {
     }
 
     public String getFullDate(){ return fullDate; }
+
+    public Sofer getSofer(){return sofer;}
 }

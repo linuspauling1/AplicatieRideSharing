@@ -77,6 +77,13 @@ public class DriverPage {
             }
         });
 
+        list.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                new VizualizareComenzi(sofer);
+            }
+        });
+
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
