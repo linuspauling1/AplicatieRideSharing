@@ -42,7 +42,7 @@ public class CustomerGUI {
             @Override
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new Review();
+                new Review(c);
             }
         });
         b4 = new JButton("Inapoi");

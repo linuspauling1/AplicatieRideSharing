@@ -101,4 +101,5 @@ public class ListaComenzi {
         frame.setSize(700,400);
         frame.setVisible(true);
     }
+
 }

@@ -1,5 +1,8 @@
 package graphicalUserInterface.customerPage;
 
+import DOM.Parser;
+import dataStructures.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,8 +15,10 @@ public class Review {
     private JFrame frame;
     private JTextField textField;
     private JTextField textField_1;
+    private Client client;
 
-    public Review() {
+    public Review(Client client) {
+        this.client = client;
         initialize();
         frame.setVisible(true);
     }
@@ -29,7 +34,21 @@ public class Review {
         frame.getContentPane().add(lblRecenzii);
 
         JButton btnNewButton = new JButton("Salvati\r\n");
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String textRecenzie = textField.getText();
+                String data = textField_1.getText();
+                try{
+                    Parser.addReview(client,data,textRecenzie);
+                } catch(Exception exception){
+                    JOptionPane.showMessageDialog(frame, "Data incorecta.");
+                }
+                CustomerGUI.afiseaza();
+                frame.setVisible(false);
+            }
+        });
         btnNewButton.setBounds(274, 254, 115, 29);
+
         frame.getContentPane().add(btnNewButton);
 
         JButton btnInapoi = new JButton("Inapoi");
@@ -47,20 +66,15 @@ public class Review {
         label.setBounds(86, 107, 69, 20);
         frame.getContentPane().add(label);
 
-        JLabel lblNewLabel = new JLabel("Sofer:");
-        lblNewLabel.setFont(new Font("Stencil", Font.PLAIN, 16));
-        lblNewLabel.setBounds(86, 153, 69, 20);
-        frame.getContentPane().add(lblNewLabel);
-
         JLabel lblNewLabel_1 = new JLabel("Recenzia:");
         lblNewLabel_1.setFont(new Font("Stencil", Font.PLAIN, 16));
-        lblNewLabel_1.setBounds(83, 201, 87, 41);
+        lblNewLabel_1.setBounds(82, 165, 87, 41);
         frame.getContentPane().add(lblNewLabel_1);
 
         textField = new JTextField();
         textField.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-        textField.setBackground(new Color(255, 160, 122));
-        textField.setBounds(200, 148, 300, 30);
+        textField.setBackground(new Color(240, 128, 128));
+        textField.setBounds(200, 170, 300, 30);
         frame.getContentPane().add(textField);
         textField.setColumns(10);
 
@@ -70,15 +84,6 @@ public class Review {
         textField_1.setColumns(10);
         textField_1.setBounds(200, 104, 300, 30);
         frame.getContentPane().add(textField_1);
-
-        JScrollPane scrollPane = new JScrollPane();
-        scrollPane.setBounds(200, 194, 300, 44);
-        frame.getContentPane().add(scrollPane);
-
-        JTextPane textPane = new JTextPane();
-        textPane.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-        scrollPane.setViewportView(textPane);
-        textPane.setBackground(new Color(240, 128, 128));
         frame.setBounds(100, 100, 700, 400);
         frame.addWindowListener(new WindowAdapter() {
             @Override

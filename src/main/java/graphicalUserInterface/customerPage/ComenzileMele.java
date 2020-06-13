@@ -24,7 +24,7 @@ public class ComenzileMele {
     public ComenzileMele(Client client) {
         this.client = client;
         comandaDeAfisat = Parser.getEfectuate();
-        campuriComanda = new Object[comandaDeAfisat.size()][4];
+        campuriComanda = new Object[comandaDeAfisat.size()][5];
         if (comandaDeAfisat != null) {
             int i = 0;
             for (ComandaEfectuata tmp : comandaDeAfisat) {
@@ -32,7 +32,8 @@ public class ComenzileMele {
                     campuriComanda[i][0] = tmp.getDestinatie();
                     campuriComanda[i][1] = tmp.getDistanta();
                     campuriComanda[i][2] = tmp.getPret();
-                    campuriComanda[i++][3] = tmp.getUsernameSofer();
+                    campuriComanda[i][3] = tmp.getUsernameSofer();
+                    campuriComanda[i++][4] = tmp.getReview();
                 }
             }
 
@@ -59,7 +60,7 @@ public class ComenzileMele {
             frame.getContentPane().add(btnInapoi);
 
             scrollPane = new JScrollPane();
-            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
             scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             scrollPane.setBounds(15, 64, 648, 177);
             frame.getContentPane().add(scrollPane);
@@ -70,7 +71,7 @@ public class ComenzileMele {
             table.setModel(new DefaultTableModel(
                     campuriComanda,
                     new String[]{
-                            "Destinatie", "Distanta", "Pret", "Sofer"
+                            "Destinatie", "Distanta", "Pret", "Sofer","Recenzie"
                     }
             ));
             frame.addWindowListener(new WindowAdapter() {
