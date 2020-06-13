@@ -24,9 +24,14 @@ public class ComenzileMele {
     public ComenzileMele(Client client) {
         this.client = client;
         comandaDeAfisat = Parser.getEfectuate();
-        campuriComanda = new Object[comandaDeAfisat.size()][5];
         if (comandaDeAfisat != null) {
-            int i = 0;
+            int i = 0,size = 0;
+            for (ComandaEfectuata tmp : comandaDeAfisat) {
+                if (tmp.getClient().equals(client)) {
+                    ++size;
+                }
+            }
+            campuriComanda = new Object[size][5];
             for (ComandaEfectuata tmp : comandaDeAfisat) {
                 if (tmp.getClient().equals(client)) {
                     campuriComanda[i][0] = tmp.getDestinatie();
