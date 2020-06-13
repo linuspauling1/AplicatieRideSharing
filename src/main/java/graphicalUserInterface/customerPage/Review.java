@@ -13,8 +13,8 @@ import java.awt.event.WindowEvent;
 public class Review {
 
     private JFrame frame;
-    private JTextField textField;
-    private JTextField textField_1;
+    private JTextArea textField;
+    private JTextArea textField_1;
     private Client client;
 
     public Review(Client client) {
@@ -71,19 +71,25 @@ public class Review {
         lblNewLabel_1.setBounds(82, 165, 87, 41);
         frame.getContentPane().add(lblNewLabel_1);
 
-        textField = new JTextField();
-        textField.setFont(new Font("Sylfaen", Font.PLAIN, 18));
-        textField.setBackground(new Color(240, 128, 128));
-        textField.setBounds(200, 170, 300, 30);
-        frame.getContentPane().add(textField);
-        textField.setColumns(10);
+        JScrollPane scrollPane_1 = new JScrollPane();
+        scrollPane_1.setBounds(200, 92, 300, 42);
+        frame.getContentPane().add(scrollPane_1);
 
-        textField_1 = new JTextField();
+        textField_1 = new JTextArea();
+        scrollPane_1.setViewportView(textField_1);
         textField_1.setFont(new Font("Sylfaen", Font.PLAIN, 18));
         textField_1.setBackground(new Color(255, 160, 122));
         textField_1.setColumns(10);
-        textField_1.setBounds(200, 104, 300, 30);
-        frame.getContentPane().add(textField_1);
+
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setBounds(200, 150, 300, 88);
+        frame.getContentPane().add(scrollPane);
+
+        textField = new JTextArea();
+        textField.setFont(new Font("Sylfaen", Font.PLAIN, 22));
+        scrollPane.setViewportView(textField);
+        textField.setBackground(new Color(240, 128, 128));
+        textField.setColumns(10);
         frame.setBounds(100, 100, 700, 400);
         frame.addWindowListener(new WindowAdapter() {
             @Override

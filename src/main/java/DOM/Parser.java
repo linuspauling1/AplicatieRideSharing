@@ -5,7 +5,6 @@ import dataStructures.Client;
 import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
 import dataStructures.Sofer;
-import graphicalUserInterface.driverPage.DriverPage;
 import graphicalUserInterface.driverPage.ListaComenzi;
 import jsonClasses.JSONEditProfile;
 import org.w3c.dom.*;
@@ -215,9 +214,7 @@ public class Parser {
                                     distanta = Integer.parseInt(cChild.getTextContent());
                                     break;
                                 case "sofer":
-                                    sofer = DriverPage.getSofer();
-                                    if(sofer == null)
-                                        sofer = JSONEditProfile.getSofer(cChild.getTextContent());
+                                    sofer = JSONEditProfile.getSofer(cChild.getTextContent());
                                     break;
                                 case "recenzie":
                                     recenzie = cChild.getTextContent();
