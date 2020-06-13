@@ -1,5 +1,6 @@
 package DOM;
 
+import Exceptions.ComandaEfectuataInexistanta;
 import dataStructures.Client;
 import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
@@ -41,19 +42,19 @@ public class Parser {
             Document doc = dBuilder.parse(inputFile);
             doc.getDocumentElement().normalize();
             NodeList nList = doc.getElementsByTagName("comanda");
-            for(int i = 0;i < nList.getLength();++i) {
+            for (int i = 0; i < nList.getLength(); ++i) {
                 Node nNode = nList.item(i);
-                if(nNode.getNodeType() == Node.ELEMENT_NODE) {
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Element eElement = (Element) nNode;
                     NodeList lList = eElement.getChildNodes();
                     Client cl = null;
                     String destinatie = "";
                     String loc = "";
-                    int an = 0,luna = 0, zi = 0, ora = 0, minut = 0,secunda = 0;
-                    for(int j = 0;j < lList.getLength();++j) {
+                    int an = 0, luna = 0, zi = 0, ora = 0, minut = 0, secunda = 0;
+                    for (int j = 0; j < lList.getLength(); ++j) {
                         Node cChild = lList.item(j);
-                        if(cChild.getNodeName() != "data") {
-                            switch(cChild.getNodeName()){
+                        if (cChild.getNodeName() != "data") {
+                            switch (cChild.getNodeName()) {
                                 case "userClient":
                                     cl = jsonClasses.JSONClient.findClient(cChild.getTextContent());
                                     break;
@@ -67,10 +68,9 @@ public class Parser {
                                     System.out.println("ceva lipseste!");
                             }
 
-                        }
-                        else {
+                        } else {
                             NodeList sublist = cChild.getChildNodes();
-                            for(int k = 0;k < sublist.getLength();++k) {
+                            for (int k = 0; k < sublist.getLength(); ++k) {
                                 Node subchild = sublist.item(k);
                                 switch (subchild.getNodeName()) {
                                     case "an":
@@ -97,7 +97,7 @@ public class Parser {
                             }
                         }
                     }
-                    ComandaNepreluata cn = new ComandaNepreluata(cl,an,luna,zi,ora,minut,secunda,loc,destinatie);
+                    ComandaNepreluata cn = new ComandaNepreluata(cl, an, luna, zi, ora, minut, secunda, loc, destinatie);
                     comenzi.add(cn);
                 }
             }
@@ -113,7 +113,7 @@ public class Parser {
         }
     }
 
-    public static void afisareXML(){
+    public static void afisareXML() {
         citireInformatiiXML();
         new ListaComenzi(comenzi);
     }
@@ -167,7 +167,7 @@ public class Parser {
 
     }
 
-    public static ArrayList<ComandaEfectuata> getEfectuate(){
+    public static ArrayList<ComandaEfectuata> getEfectuate() {
         citireInformatiiXMLEfectuate();
         return efectuate;
     }
@@ -191,6 +191,7 @@ public class Parser {
                     String destinatie = "";
                     String loc = "";
                     Sofer sofer = null;
+                    String recenzie = null;
                     int pret = 0;
                     int distanta = 0;
                     int an = 0,luna = 0, zi = 0, ora = 0, minut = 0,secunda = 0;
@@ -217,6 +218,9 @@ public class Parser {
                                     sofer = DriverPage.getSofer();
                                     if(sofer == null)
                                         sofer = JSONEditProfile.getSofer(cChild.getTextContent());
+                                    break;
+                                case "recenzie":
+                                    recenzie = cChild.getTextContent();
                                     break;
                                 default:
                                     System.out.println("ceva lipseste!");
@@ -253,7 +257,7 @@ public class Parser {
                         }
                     }
                     ComandaEfectuata ce = new ComandaEfectuata(cl,an,luna,zi,ora,minut,secunda,loc,destinatie,
-                            sofer,pret,distanta);
+                            sofer,pret,distanta,recenzie);
                     efectuate.add(ce);
                 }
             }
@@ -328,6 +332,9 @@ public class Parser {
         sofer.appendChild(doc.createTextNode(c.getUsernameSofer()));
         comanda.appendChild(sofer);
 
+        Element recenzie = doc.createElement("recenzie");
+        recenzie.appendChild(doc.createTextNode(c.getReview()));
+        comanda.appendChild(recenzie);
     }
 
     public static void createXML(ComandaNepreluata c) {// creare fisier XML
@@ -375,6 +382,45 @@ public class Parser {
             for(ComandaEfectuata tmp:efectuate)
                 adaugareInformatiiXMLEfectuate(tmp);
             adaugareInformatiiXMLEfectuate(c);
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(doc);
+
+            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
+            transformer.transform(source, streamResult);
+        } catch (ParserConfigurationException e) {;
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (TransformerConfigurationException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void addReview(Client client, String fullDate, String recenzie) throws ComandaEfectuataInexistanta {// creare fisier XML
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            builder = factory.newDocumentBuilder();
+            doc = builder.newDocument();
+
+            element = doc.createElement("comenzi");
+            doc.appendChild(element);
+
+            citireInformatiiXMLEfectuate();
+            boolean found = false;
+            for(ComandaEfectuata tmp: efectuate)
+                if(tmp.getFullDate().equals(fullDate) & tmp.getClient().equals(client)){
+                    tmp.setReview(recenzie);
+                    found = true;
+                }
+            if(!found)
+                throw new ComandaEfectuataInexistanta();
+            for(ComandaEfectuata tmp:efectuate)
+                adaugareInformatiiXMLEfectuate(tmp);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();

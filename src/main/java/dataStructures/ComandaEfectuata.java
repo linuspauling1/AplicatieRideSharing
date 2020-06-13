@@ -4,12 +4,27 @@ public class ComandaEfectuata extends ComandaNepreluata {
     private int pret;
     private int distanta;
     private Sofer sofer;
+    private String review;
+    private String fullDate;
 
     public ComandaEfectuata(Client client, int an, int luna, int zi, int ora, int minut,int secunda,String locatie,String destinatie,Sofer sofer,int pret,int distanta) {
         super(client, an, luna, zi, ora, minut,secunda,locatie,destinatie);
         this.sofer = sofer;
+        this.fullDate = an + "/" + luna + "/" + zi + "/" + ora + "/" + minut + "/" + secunda;
         setPret(pret);
         setDistanta(distanta);
+        setReview("                    - ");
+    }
+
+    public ComandaEfectuata(Client client, int an, int luna, int zi, int ora, int minut,int secunda,
+                            String locatie,String destinatie,Sofer sofer,int pret,int distanta,
+                            String review) {
+        super(client, an, luna, zi, ora, minut,secunda,locatie,destinatie);
+        this.sofer = sofer;
+        this.fullDate = an + "/" + luna + "/" + zi + "/" + ora + "/" + minut + "/" + secunda;
+        setPret(pret);
+        setDistanta(distanta);
+        setReview(review);
     }
 
     public int getPret() {
@@ -46,4 +61,13 @@ public class ComandaEfectuata extends ComandaNepreluata {
         return sofer.getMasina();
     }
 
+    public void setReview(String review){
+        this.review = review;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public String getFullDate(){ return fullDate; }
 }
