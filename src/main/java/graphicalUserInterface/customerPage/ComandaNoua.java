@@ -18,7 +18,7 @@ import java.util.Calendar;
 
 public class ComandaNoua {
 	private Client client;
-	private JFrame frame;
+	private static JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private String locatie;
@@ -26,8 +26,12 @@ public class ComandaNoua {
 	private static ArrayList<ComandaNepreluata> c = new ArrayList<ComandaNepreluata>();
 
 	public ComandaNoua(Client c) {
-		client=c;
+		client = c;
 		initialize();
+	}
+
+	public static void afiseaza(){
+		frame.setVisible(true);
 	}
 
 	private void initialize() {
@@ -121,7 +125,5 @@ public class ComandaNoua {
 		frame.getContentPane().add(btnContinuare);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
 	}
 }

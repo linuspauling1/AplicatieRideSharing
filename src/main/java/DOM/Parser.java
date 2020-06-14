@@ -171,6 +171,11 @@ public class Parser {
         return efectuate;
     }
 
+    public static ArrayList<ComandaNepreluata> getNepreluata(){
+        citireInformatiiXML();
+        return comenzi;
+    }
+
     public static void citireInformatiiXMLEfectuate(){
         efectuate = new ArrayList<>();
         File inputFile = new File("src/main/resources/completed.xml");

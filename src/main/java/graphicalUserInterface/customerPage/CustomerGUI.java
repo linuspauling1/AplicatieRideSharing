@@ -1,6 +1,8 @@
 package graphicalUserInterface.customerPage;
 
+import DOM.Parser;
 import dataStructures.Client;
+import dataStructures.ComandaNepreluata;
 import graphicalUserInterface.AutentificationGUI;
 
 import javax.imageio.ImageIO;
@@ -13,16 +15,26 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class CustomerGUI {
     private Client client;
+    private static Client ocupat;
     private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
 
     public static void afiseaza(){
         f.setVisible(true);
+    }
+
+    public boolean find(){
+        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
+        for(ComandaNepreluata tmp: aux)
+            if(tmp.getClient().equals(client))
+                return true;
+        return false;
     }
 
     public CustomerGUI(Client c){
@@ -81,7 +93,10 @@ public class CustomerGUI {
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new ComandaNoua(client);
+                if(find())
+                    new CommandGUI();
+                else
+                    new CompletedGUI(client);
             }
         });
         f.addWindowListener(new WindowAdapter() {
@@ -99,5 +114,9 @@ public class CustomerGUI {
         f.setLayout(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+    }
+
+    public static void setOcupat(Client ocupat) {
+        CustomerGUI.ocupat = ocupat;
     }
 }
