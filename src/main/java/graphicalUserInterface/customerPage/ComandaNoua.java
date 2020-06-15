@@ -32,37 +32,61 @@ public class ComandaNoua {
 
 	public static void afiseaza(){
 		frame.setVisible(true);
+		CustomerGUI.ascunde();
+	}
+	public static void ascunde(){
+		frame.setVisible(false);
 	}
 
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setBackground(new Color(153, 204, 204));
+		frame.getContentPane().setBackground(new Color(255, 140, 0));
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
 		JLabel lblComandaNoua = new JLabel("Comanda Noua");
-		lblComandaNoua.setForeground(Color.BLUE);
-		lblComandaNoua.setFont(new Font("Times New Roman", Font.BOLD, 20));
-		lblComandaNoua.setBounds(273, 10, 180, 29);
-		frame.getContentPane().add(lblComandaNoua);
+		lblComandaNoua.setForeground(new Color(255,255,255));
+		lblComandaNoua.setFont(new Font("Showcard Gothic", Font.PLAIN, 24));
+		lblComandaNoua.setBounds(235, 10, 233, 29);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(0, 0, 128));
+		panel.setBounds(0, 0, 686, 50);
+		frame.getContentPane().add(panel);
+		panel.add(lblComandaNoua);
+		panel.setLayout(null);
+
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(300, 60, 362, 250);
+		frame.getContentPane().add(panel_1);
+		panel_1.setLayout(null);
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(0, 0, 128));
+		panel_2.setBounds(10, 10, 342, 230);
+		panel_1.add(panel_2);
+		panel_2.setLayout(null);
 
 		JLabel lblLocatieCurenta = new JLabel("Locatie curenta");
-		lblLocatieCurenta.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		lblLocatieCurenta.setBounds(345, 74, 146, 29);
-		frame.getContentPane().add(lblLocatieCurenta);
+		lblLocatieCurenta.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblLocatieCurenta.setForeground(new Color(255, 255, 255));
+		lblLocatieCurenta.setBounds(23, 21, 146, 29);
+		panel_2.add(lblLocatieCurenta);
 
 		JLabel lblDestinatie = new JLabel("Destinatie");
-		lblDestinatie.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		lblDestinatie.setBounds(365, 119, 122, 20);
-		frame.getContentPane().add(lblDestinatie);
+		lblDestinatie.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblDestinatie.setForeground(new Color(255, 255, 255));
+		lblDestinatie.setBounds(26, 81, 122, 20);
+		panel_2.add(lblDestinatie);
 
 		textField = new JTextField();
-		textField.setBounds(478, 80, 136, 19);
-		frame.getContentPane().add(textField);
+		textField.setBounds(177, 28, 136, 19);
+		panel_2.add(textField);
 		textField.setColumns(10);
 
 		textField_1 = new JTextField();
-		textField_1.setBounds(478, 119, 136, 19);
-		frame.getContentPane().add(textField_1);
+		textField_1.setBounds(177, 84, 136, 19);
+		panel_2.add(textField_1);
 		textField_1.setColumns(10);
 
 
@@ -72,12 +96,16 @@ public class ComandaNoua {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		JLabel aux=new JLabel();
 		Image dimg = img.getScaledInstance(250, 250,Image.SCALE_SMOOTH);
 		ImageIcon imageIcon = new ImageIcon(dimg);
+		JPanel panel_3 = new JPanel();
+		panel_3.setBounds(40, 60, 250, 250);
+		frame.getContentPane().add(panel_3);
+		panel_3.setLayout(null);
+		JLabel aux=new JLabel();
+		aux.setBounds(10, 10, 230, 230);
+		panel_3.add(aux);
 		aux.setIcon(imageIcon);
-		aux.setBounds(40, 60, 250, 250);
-		frame.getContentPane().add(aux);
 
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
@@ -93,21 +121,23 @@ public class ComandaNoua {
 
 		JButton btnContinuare = new JButton("Continuare");
 		btnContinuare.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnContinuare.setBounds(438, 196, 132, 21);
+		btnContinuare.setBounds(181, 157, 132, 21);
 		JButton btnInapoi = new JButton("Inapoi");
 		btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		btnInapoi.setBounds(438, 236, 132, 21);
+		btnInapoi.setBounds(181, 199, 132, 21);
 
 		btnInapoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
+				ComandaNoua.ascunde();
 				CustomerGUI.afiseaza();
+				textField.setText("");
+				textField_1.setText("");
 			}
 		});
 		btnContinuare.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int an = Calendar.getInstance().get(Calendar.YEAR);
-				int luna = Calendar.getInstance().get(Calendar.MONTH);
+				int luna = Calendar.getInstance().get(Calendar.MONTH)+1;
 				int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
 				int ora = Calendar.getInstance().get(Calendar.HOUR);
 				int minut = Calendar.getInstance().get(Calendar.MINUTE);
@@ -118,11 +148,13 @@ public class ComandaNoua {
 				c.add(cn);
 				DOM.Parser.createXML(cn);
 				frame.setVisible(false);
-				new CommandGUI();
+				new CommandGUI(client);
+				textField.setText("");
+				textField_1.setText("");
 			}
 		});
-		frame.getContentPane().add(btnInapoi);
-		frame.getContentPane().add(btnContinuare);
+		panel_2.add(btnInapoi);
+		panel_2.add(btnContinuare);
 		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}

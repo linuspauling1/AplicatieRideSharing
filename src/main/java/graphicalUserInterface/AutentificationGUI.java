@@ -57,6 +57,7 @@ public class AutentificationGUI  {
                 String s2 = t2.getText();
                 Client c=new Client(s1,s2);
                 Sofer s=new Sofer(s1,s2);
+                resetFields();
                 if(e.getSource() == b) {
                     if(JSONFile.verificaCredentiale("src/main/resources/customers.json",c)) {
                         f.setVisible(false);

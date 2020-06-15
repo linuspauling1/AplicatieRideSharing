@@ -28,6 +28,9 @@ public class CustomerGUI {
     public static void afiseaza(){
         f.setVisible(true);
     }
+    public static void ascunde(){
+        f.setVisible(false);
+    }
 
     public boolean find(){
         ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
@@ -94,7 +97,7 @@ public class CustomerGUI {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
                 if(find())
-                    new CommandGUI();
+                    new CommandGUI(client);
                 else
                     new CompletedGUI(client);
             }

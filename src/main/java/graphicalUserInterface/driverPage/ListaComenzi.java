@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ListaComenzi {
 
@@ -54,9 +56,19 @@ public class ListaComenzi {
 
         DefaultListModel<String> l1 = new DefaultListModel<>();
         int i = 0;
-        for(ComandaNepreluata tmp: cn)
-            l1.addElement("Preluati comanda " + " " + (++i) + " " + tmp.toString());
-
+        for(ComandaNepreluata tmp: cn) {
+            int an = Calendar.getInstance().get(Calendar.YEAR);
+            int luna = Calendar.getInstance().get(Calendar.MONTH);
+            int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+            int ora = Calendar.getInstance().get(Calendar.HOUR);
+            int minut = Calendar.getInstance().get(Calendar.MINUTE);
+            int secunda = Calendar.getInstance().get(Calendar.SECOND);
+            long time_now=(new Date(an,luna+1,zi,ora,minut,secunda).getTime());;
+            long time_comanda=(new Date(tmp.getAn(),tmp.getLuna(),tmp.getZi(),tmp.getOra(),tmp.getMinut(),tmp.getSecunda()).getTime());
+            int TIME_VISIBLE=(int)(5*60*1000-(time_now-time_comanda));
+            if(TIME_VISIBLE>=0)
+                   l1.addElement("Preluati comanda " + " " + (++i) + " " + tmp.toString());
+        }
         JList list = new JList(l1);
         list.setBackground(new Color(0, 153, 153));
         scrollPane.setViewportView(list);
