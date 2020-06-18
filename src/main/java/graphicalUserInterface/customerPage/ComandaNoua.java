@@ -32,7 +32,7 @@ public class ComandaNoua {
 
 	public static void afiseaza(){
 		frame.setVisible(true);
-		CustomerGUI.afiseaza();
+		CustomerGUI.ascunde();
 	}
 	public static void ascunde(){
 		frame.setVisible(false);

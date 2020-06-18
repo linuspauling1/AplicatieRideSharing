@@ -26,15 +26,7 @@ public class CommandGUI {
             if (cn.getUsernameClient().equals(client.getUsername()))
                 comanda = cn;
         }
-        int an = Calendar.getInstance().get(Calendar.YEAR);
-        int luna = Calendar.getInstance().get(Calendar.MONTH);
-        int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-        int ora = Calendar.getInstance().get(Calendar.HOUR);
-        int minut = Calendar.getInstance().get(Calendar.MINUTE);
-        int secunda = Calendar.getInstance().get(Calendar.SECOND);
-        long time_now=(new Date(an,luna+1,zi,ora,minut,secunda).getTime());;
-        long time_comanda=(new Date(comanda.getAn(),comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),comanda.getSecunda()).getTime());
-        int TIME_VISIBLE=(int)(5*60*1000-(time_now-time_comanda));
+        int TIME_VISIBLE=calculeazaTimpRamas(comanda);
 
         jf = new JFrame("Comanda in asteptare");
         jf.getContentPane().setBackground(new Color(127, 255, 212));
@@ -50,7 +42,8 @@ public class CommandGUI {
             public void actionPerformed(ActionEvent e){
                 jf.dispose();
                 Parser.delete(comanda);
-                ComandaNoua.afiseaza();
+                if(jf.isActive()||CustomerGUI.activ())
+                    ComandaNoua.afiseaza();
             }
         }).start();
 
@@ -76,6 +69,25 @@ public class CommandGUI {
         jf.setSize(700,400);
         jf.setLayout(null);
         jf.setVisible(true);
+    }
+    public static int calculeazaTimpRamas(ComandaNepreluata c){
+        int an = Calendar.getInstance().get(Calendar.YEAR);
+        int luna = Calendar.getInstance().get(Calendar.MONTH);
+        int zi = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+        int ora = Calendar.getInstance().get(Calendar.HOUR);
+        int minut = Calendar.getInstance().get(Calendar.MINUTE);
+        int secunda = Calendar.getInstance().get(Calendar.SECOND);
+        long time_now=(new Date(an,luna+1,zi,ora,minut,secunda).getTime());;
+        long time_comanda=(new Date(c.getAn(),c.getLuna(),c.getZi(),c.getOra(),c.getMinut(),c.getSecunda()).getTime());
+        return (int)(5*60*1000-(time_now-time_comanda));
+    }
+
+    public static boolean verificaData(ComandaNepreluata c){
+         if(calculeazaTimpRamas(c)<0){
+             DOM.Parser.delete(c);
+             return false;
+         }
+         return true;
     }
 }
 

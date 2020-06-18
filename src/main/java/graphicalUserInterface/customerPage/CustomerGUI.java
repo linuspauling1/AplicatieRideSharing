@@ -29,11 +29,14 @@ public class CustomerGUI {
     public static void afiseaza(){
         f.setVisible(true);
     }
-
+    public static boolean activ(){return f.isActive();}
+    public static void ascunde(){
+        f.setVisible(false);
+    }
     public boolean find(){
         ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
         for(ComandaNepreluata tmp: aux)
-            if(tmp.getClient().equals(client))
+            if(tmp.getClient().equals(client)&&CommandGUI.verificaData(tmp)==true)
                 return true;
         return false;
     }
@@ -41,7 +44,7 @@ public class CustomerGUI {
     public boolean check(){
         ArrayList<ComandaEfectuata> aux = Parser.getEfectuate();
         for(ComandaEfectuata tmp: aux)
-            if(tmp.getClient().equals(client))
+            if(tmp.getClient().equals(client)&&tmp.getDistanta()==0)
                 return true;
         return false;
     }

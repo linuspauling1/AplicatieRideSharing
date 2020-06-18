@@ -73,7 +73,7 @@ public class DriverPage {
         inapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new AutentificationGUI();
+                AutentificationGUI.afiseaza();
             }
         });
 

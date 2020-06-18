@@ -126,17 +126,18 @@ public class EditProfileGUI {
                     CNP=sofer.getCNP();
                     masina=sofer.getMasina();
                     nr=sofer.getNumarInmatriculare();
-                    if(textField.getText().equals("")==false)
-                         nume = textField.getText();
+                    if(textField.getText().equals("")==false){
+                        nume = textField.getText();
+                    }
                     if(passwordField.getText().equals("")==false)
-                         parola = passwordField.getText();
+                         parola = JSONFile.encrypt(passwordField.getText());
                     if(cnp.getText().equals("")==false)
                         CNP = cnp.getText();
                     if(car.getText().equals("")==false)
                         masina = car.getText();
                     if(nri.getText().equals("")==false)
                         nr = nri.getText();
-                    Sofer sof = new Sofer(nume, JSONFile.encrypt(parola));
+                    Sofer sof = new Sofer(nume, parola);
                     sof.setNumarInmatriculare(nr);
                     sof.setMasina(masina);
                     sof.setCNP(CNP);
