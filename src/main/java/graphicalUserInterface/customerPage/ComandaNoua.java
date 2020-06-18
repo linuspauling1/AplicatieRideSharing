@@ -32,7 +32,7 @@ public class ComandaNoua {
 
 	public static void afiseaza(){
 		frame.setVisible(true);
-		CustomerGUI.ascunde();
+		CustomerGUI.afiseaza();
 	}
 	public static void ascunde(){
 		frame.setVisible(false);
@@ -106,7 +106,6 @@ public class ComandaNoua {
 		aux.setBounds(10, 10, 230, 230);
 		panel_3.add(aux);
 		aux.setIcon(imageIcon);
-
 		frame.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -114,7 +113,7 @@ public class ComandaNoua {
 						" ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
 				if (result == JOptionPane.YES_OPTION)
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				else if( result == JOptionPane.NO_OPTION)
+				else
 					frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			}
 		});

@@ -41,7 +41,7 @@ public class EditProfileGUI {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
@@ -111,6 +111,11 @@ public class EditProfileGUI {
         btnSalveazaModificari.setBounds(260, 218, 147, 32);
         frame.getContentPane().add(btnSalveazaModificari);
 
+        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        btnInapoi.setBounds(103, 218, 147, 32);
+        frame.getContentPane().add(btnInapoi);
+
         btnSalveazaModificari.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     ArrayList<Sofer> soferi = JSONEditProfile.getDriver();
@@ -140,6 +145,13 @@ public class EditProfileGUI {
                     frame.setVisible(false);
                     new DriverPage(sof);
                 }
+        });
+
+        btnInapoi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                DriverPage.afiseaza();
+            }
         });
     }
 }

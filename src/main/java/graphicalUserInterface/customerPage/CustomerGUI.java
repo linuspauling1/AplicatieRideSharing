@@ -2,6 +2,7 @@ package graphicalUserInterface.customerPage;
 
 import DOM.Parser;
 import dataStructures.Client;
+import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
 import graphicalUserInterface.AutentificationGUI;
 
@@ -28,9 +29,6 @@ public class CustomerGUI {
     public static void afiseaza(){
         f.setVisible(true);
     }
-    public static void ascunde(){
-        f.setVisible(false);
-    }
 
     public boolean find(){
         ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
@@ -40,9 +38,18 @@ public class CustomerGUI {
         return false;
     }
 
+    public boolean check(){
+        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate();
+        for(ComandaEfectuata tmp: aux)
+            if(tmp.getClient().equals(client))
+                return true;
+        return false;
+    }
+
     public CustomerGUI(Client c){
         client=c;
         f = new JFrame("Customer's page");
+        f.getContentPane().setBackground(new Color(44, 224, 174));
         b1 = new JButton("Comenzile mele");
         b1.addActionListener(new ActionListener() {
             @Override
@@ -98,8 +105,10 @@ public class CustomerGUI {
                 f.setVisible(false);
                 if(find())
                     new CommandGUI(client);
-                else
+                else if(check())
                     new CompletedGUI(client);
+                else
+                    new ComandaNoua(client);
             }
         });
         f.addWindowListener(new WindowAdapter() {
@@ -109,7 +118,7 @@ public class CustomerGUI {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });

@@ -38,7 +38,7 @@ public class InfoCalatorie {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     frmInfoCursa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     frmInfoCursa.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });

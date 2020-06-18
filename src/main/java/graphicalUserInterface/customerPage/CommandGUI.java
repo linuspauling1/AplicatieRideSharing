@@ -68,7 +68,7 @@ public class CommandGUI {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     jf.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
