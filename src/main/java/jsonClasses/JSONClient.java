@@ -5,8 +5,6 @@ import dataStructures.Client;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -23,11 +21,6 @@ public class JSONClient {
             try {
                 c.setCNP((String)objInt.get("CNP"));
             } catch (CNPException e) {
-                Component frame = null;
-                JOptionPane.showMessageDialog(frame,
-                        "CNP-ul este invalid",
-                        "eroare la conectare",
-                        JOptionPane.ERROR_MESSAGE);
             }
             c.setTelefon((String)objInt.get("Telefon"));
             clienti.add(c);
