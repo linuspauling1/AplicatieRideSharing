@@ -1,12 +1,12 @@
 package dataStructures;
 
-import javax.swing.*;
-import java.awt.*;
+import Exceptions.CNPException;
 
 public abstract class User {
     protected String username;
     protected String password;
     protected String CNP;
+    private boolean flag;
     public User(String username,String password) {
         this.username = username;
         this.password = password;
@@ -19,13 +19,10 @@ public abstract class User {
         return password;
     }
 
-    public void setCNP(String CNP) {
-        if(!isNumeric(CNP)){
-            Component frame = null;
-            JOptionPane.showMessageDialog(frame,
-                    "CNP-ul este invalid",
-                    "eroare la conectare",
-                    JOptionPane.ERROR_MESSAGE);
+    public void setCNP(String CNP) throws CNPException {
+        if(!isNumeric(CNP)) {
+            flag = true;
+            throw new CNPException();
         }
         else
             this.CNP = CNP;
@@ -47,11 +44,7 @@ public abstract class User {
         return true;
     }
 
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", CNP='" + CNP + '\'' +
-                '}';
+    public boolean isFlag() {
+        return flag;
     }
 }

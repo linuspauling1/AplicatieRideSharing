@@ -1,9 +1,12 @@
 package jsonClasses;
 
+import Exceptions.CNPException;
 import dataStructures.Sofer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,7 +45,15 @@ public class JSONEditProfile {
             JSONObject objInt = (JSONObject) obj.get("customer :");
             Sofer s=new Sofer((String)objInt.get("username"),(String)objInt.get("password"));
             s.setMasina((String)objInt.get("Masina"));
-            s.setCNP((String)objInt.get("CNP"));
+            try {
+                s.setCNP((String)objInt.get("CNP"));
+            } catch (CNPException e) {
+                Component frame = null;
+                JOptionPane.showMessageDialog(frame,
+                        "CNP-ul este invalid",
+                        "eroare la conectare",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             s.setNumarInmatriculare((String)objInt.get("NumarInmatriculare"));
             soferi.add(s);
         }

@@ -1,9 +1,12 @@
 package jsonClasses;
 
+import Exceptions.CNPException;
 import dataStructures.Client;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -17,7 +20,15 @@ public class JSONClient {
             JSONObject objInt = (JSONObject) obj.get("customer :");
             Client c = new Client((String)objInt.get("username"),(String)objInt.get("password"));
             c.setAdresa((String)objInt.get("Adresa"));
-            c.setCNP((String)objInt.get("CNP"));
+            try {
+                c.setCNP((String)objInt.get("CNP"));
+            } catch (CNPException e) {
+                Component frame = null;
+                JOptionPane.showMessageDialog(frame,
+                        "CNP-ul este invalid",
+                        "eroare la conectare",
+                        JOptionPane.ERROR_MESSAGE);
+            }
             c.setTelefon((String)objInt.get("Telefon"));
             clienti.add(c);
         }

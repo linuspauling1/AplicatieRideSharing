@@ -1,4 +1,5 @@
 package graphicalUserInterface.driverPage;
+import Exceptions.CNPException;
 import dataStructures.Sofer;
 import jsonClasses.JSONEditProfile;
 import jsonClasses.JSONFile;
@@ -140,8 +141,16 @@ public class EditProfileGUI {
                     Sofer sof = new Sofer(nume, parola);
                     sof.setNumarInmatriculare(nr);
                     sof.setMasina(masina);
+                try {
                     sof.setCNP(CNP);
-                    soferi.add(sof);
+                } catch (CNPException cnpException) {
+                    Component frame = null;
+                    JOptionPane.showMessageDialog(frame,
+                            "CNP-ul este invalid",
+                            "eroare la conectare",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                soferi.add(sof);
                     JSONEditProfile.writeDriver(soferi);
                     frame.setVisible(false);
                     new DriverPage(sof);

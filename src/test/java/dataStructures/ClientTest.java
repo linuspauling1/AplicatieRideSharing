@@ -1,5 +1,6 @@
 package dataStructures;
 
+import Exceptions.CNPException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ public class ClientTest {
     private final String alfanumeric = "ab33jjj";
 
     @Before
-    public void initializeClient(){
+    public void initializeClient() throws Exception {
         client = new Client(user,parola);
         copy = new Client(user,parola);
         string = "Client { " + user + " } ";
@@ -45,35 +46,31 @@ public class ClientTest {
         assertEquals(client.getCNP(),CNP);
     }
 
-    @Test
+    @Test(expected = CNPException.class)
     public void setCNP() throws Exception {
+        client.setCNP(alfanumeric);
+        assertEquals(client.isFlag(),true);
         client.setCNP(altCNP);
         assertNotEquals(client.getCNP(),CNP);
-        client.setCNP(CNP);
     }
 
     @Test
-    public void testIsNumeric1() throws Exception {
-        assertEquals(client.isNumeric(user),false);
-    }
-
-    @Test
-    public void testIsNumeric2() throws Exception {
+    public void testIsNumeric() throws Exception {
+        assertEquals(client.isNumeric(alfanumeric),false);
         assertEquals(client.isNumeric(CNP),true);
+        assertNotEquals(client.isNumeric(null),true);
     }
 
     @Test
     public void setTelefon() throws Exception {
         client.setTelefon(altTelefon);
         assertNotEquals(client.getTelefon(),telefon);
-        client.setTelefon(telefon);
     }
 
     @Test
     public void setAdresa() throws Exception {
         client.setAdresa(altaAdresa);
         assertNotEquals(client.getAdresa(),adresa);
-        client.setTelefon(adresa);
     }
 
     @Test
@@ -94,5 +91,11 @@ public class ClientTest {
     @Test
     public void testEquals() throws Exception {
         assertEquals(client,copy);
+        assertNotEquals(client,null);
+    }
+
+    @Test
+    public void testIsFlag() {
+        assertNotNull(client.isFlag());
     }
 }
