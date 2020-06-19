@@ -41,7 +41,7 @@ public class EditProfileGUI {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
@@ -111,6 +111,11 @@ public class EditProfileGUI {
         btnSalveazaModificari.setBounds(260, 218, 147, 32);
         frame.getContentPane().add(btnSalveazaModificari);
 
+        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 12));
+        btnInapoi.setBounds(103, 218, 147, 32);
+        frame.getContentPane().add(btnInapoi);
+
         btnSalveazaModificari.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     ArrayList<Sofer> soferi = JSONEditProfile.getDriver();
@@ -121,17 +126,18 @@ public class EditProfileGUI {
                     CNP=sofer.getCNP();
                     masina=sofer.getMasina();
                     nr=sofer.getNumarInmatriculare();
-                    if(textField.getText().equals("")==false)
-                         nume = textField.getText();
+                    if(textField.getText().equals("")==false){
+                        nume = textField.getText();
+                    }
                     if(passwordField.getText().equals("")==false)
-                         parola = passwordField.getText();
+                         parola = JSONFile.encrypt(passwordField.getText());
                     if(cnp.getText().equals("")==false)
                         CNP = cnp.getText();
                     if(car.getText().equals("")==false)
                         masina = car.getText();
                     if(nri.getText().equals("")==false)
                         nr = nri.getText();
-                    Sofer sof = new Sofer(nume, JSONFile.encrypt(parola));
+                    Sofer sof = new Sofer(nume, parola);
                     sof.setNumarInmatriculare(nr);
                     sof.setMasina(masina);
                     sof.setCNP(CNP);
@@ -140,6 +146,13 @@ public class EditProfileGUI {
                     frame.setVisible(false);
                     new DriverPage(sof);
                 }
+        });
+
+        btnInapoi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+                DriverPage.afiseaza();
+            }
         });
     }
 }

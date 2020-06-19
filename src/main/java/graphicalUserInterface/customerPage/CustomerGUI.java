@@ -1,6 +1,9 @@
 package graphicalUserInterface.customerPage;
 
+import DOM.Parser;
 import dataStructures.Client;
+import dataStructures.ComandaEfectuata;
+import dataStructures.ComandaNepreluata;
 import graphicalUserInterface.AutentificationGUI;
 
 import javax.imageio.ImageIO;
@@ -13,10 +16,12 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class CustomerGUI {
     private Client client;
+    private static Client ocupat;
     private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
@@ -24,10 +29,30 @@ public class CustomerGUI {
     public static void afiseaza(){
         f.setVisible(true);
     }
+    public static boolean activ(){return f.isActive();}
+    public static void ascunde(){
+        f.setVisible(false);
+    }
+    public boolean find(){
+        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
+        for(ComandaNepreluata tmp: aux)
+            if(tmp.getClient().equals(client)&&CommandGUI.verificaData(tmp)==true)
+                return true;
+        return false;
+    }
+
+    public boolean check(){
+        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate();
+        for(ComandaEfectuata tmp: aux)
+            if(tmp.getClient().equals(client)&&tmp.getDistanta()==0)
+                return true;
+        return false;
+    }
 
     public CustomerGUI(Client c){
         client=c;
         f = new JFrame("Customer's page");
+        f.getContentPane().setBackground(new Color(44, 224, 174));
         b1 = new JButton("Comenzile mele");
         b1.addActionListener(new ActionListener() {
             @Override
@@ -81,7 +106,12 @@ public class CustomerGUI {
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                new ComandaNoua(client);
+                if(find())
+                    new CommandGUI(client);
+                else if(check())
+                    new CompletedGUI(client);
+                else
+                    new ComandaNoua(client);
             }
         });
         f.addWindowListener(new WindowAdapter() {
@@ -91,7 +121,7 @@ public class CustomerGUI {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
@@ -99,5 +129,9 @@ public class CustomerGUI {
         f.setLayout(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.setVisible(true);
+    }
+
+    public static void setOcupat(Client ocupat) {
+        CustomerGUI.ocupat = ocupat;
     }
 }

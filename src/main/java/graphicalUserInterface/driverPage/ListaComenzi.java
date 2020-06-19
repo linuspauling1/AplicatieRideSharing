@@ -3,6 +3,7 @@ package graphicalUserInterface.driverPage;
 import DOM.Parser;
 import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
+import graphicalUserInterface.customerPage.CommandGUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,6 +12,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ListaComenzi {
 
@@ -40,7 +43,7 @@ public class ListaComenzi {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
@@ -54,9 +57,10 @@ public class ListaComenzi {
 
         DefaultListModel<String> l1 = new DefaultListModel<>();
         int i = 0;
-        for(ComandaNepreluata tmp: cn)
-            l1.addElement("Preluati comanda " + " " + (++i) + " " + tmp.toString());
-
+        for(ComandaNepreluata tmp: cn) {
+            if(CommandGUI.verificaData(tmp)==true)
+                   l1.addElement("Preluati comanda " + " " + (++i) + " " + tmp.toString());
+        }
         JList list = new JList(l1);
         list.setBackground(new Color(0, 153, 153));
         scrollPane.setViewportView(list);

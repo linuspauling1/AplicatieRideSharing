@@ -2,15 +2,16 @@ package graphicalUserInterface;
 
 import dataStructures.Client;
 import dataStructures.Sofer;
+import graphicalUserInterface.customerPage.CustomerGUI;
+import graphicalUserInterface.driverPage.DriverPage;
 import jsonClasses.JSONCreate;
 import jsonClasses.JSONFile;
-import graphicalUserInterface.customerPage.*;
-import graphicalUserInterface.driverPage.*;
 import org.apache.commons.io.FileUtils;
 import services.FileSystemService;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +34,9 @@ public class AutentificationGUI  {
     JTextField t1;//camp nume
     JPasswordField t2;//camp parola
     public AutentificationGUI() {
+        JSONCreate.secure();
         f = new JFrame("inregistrare");//frame
+        f.getContentPane().setBackground(new Color(255, 165, 10));
         l1 = new JLabel("Numele complet:");//eticheta indicatoare camp pentru nume complet
         l2 = new JLabel("Parola:");//eticheta indicatoare camp pentru parola
         l3 = new JLabel("Welcome to Ride-Sharing app!");//eticheta indicatoare titlu
@@ -44,19 +47,25 @@ public class AutentificationGUI  {
         l3.setBounds(175, 0, 300, 50);
         l3.setFont(new Font("Bernard MT Condensed", Font.ITALIC, 25));
         l3.setForeground(Color.blue);
-        l1.setBounds(400,50, 100,30);
-        t1.setBounds(400,100, 200,30);
-        l2.setBounds(400,150, 100,30);
-        t2.setBounds(400,200, 200,30);
+        l1.setBounds(405,60, 150,30);
+        l1.setFont(new Font("Trebuchet MS", Font.BOLD,16));
+        t1.setBounds(5, 5, 200, 30);
+        t1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
+        t1.setForeground(Color.magenta);
+        l2.setBounds(405,160, 100,30);
+        l2.setFont(new Font("Trebuchet MS", Font.BOLD,16));
+        t2.setBounds(5, 5, 200, 30);
         b.setBounds(450,270,110,30);//x axis, y axis, width, height
         l4.setBounds(100,50,500,30);
-        l4.setFont(new Font("Arial", Font.ITALIC, 12));
+        l4.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
+        l4.setForeground(Color.red);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String s1 = t1.getText();
                 String s2 = t2.getText();
                 Client c=new Client(s1,s2);
                 Sofer s=new Sofer(s1,s2);
+                resetFields();
                 if(e.getSource() == b) {
                     if(JSONFile.verificaCredentiale("src/main/resources/customers.json",c)) {
                         f.setVisible(false);
@@ -84,9 +93,35 @@ public class AutentificationGUI  {
         ImageIcon icon = new ImageIcon(dimg);
         l5 = new JLabel(icon);
         l5.setBounds(80, 80, 250, 250);
-        f.add(l3);
-        f.add(t1);
-        f.add(t2);
+
+        JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(138, 43, 226));
+        panel_1.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_1.setBounds(165, 3, 310, 51);
+        f.getContentPane().add(panel_1);
+        panel_1.setLayout(null);
+
+        JPanel panel = new JPanel();
+        panel.setBounds(5, 10, 300, 35);
+        panel_1.add(panel);
+
+        JPanel panel_2 = new JPanel();
+        panel_2.setLayout(null);
+        panel_2.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_2.setBackground(new Color(0, 100, 0));
+        panel_2.setBounds(400,100, 210,40);
+        f.getContentPane().add(panel_2);
+        panel_2.add(t1);
+
+        JPanel panel_4 = new JPanel();
+        panel_4.setLayout(null);
+        panel_4.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_4.setBackground(new Color(0, 100, 0));
+        panel_4.setBounds(400,200, 210,40);
+        f.getContentPane().add(panel_4);
+        panel_4.add(t2);
+
+        panel.add(l3);
         f.add(l1);
         f.add(l2);
         f.add(b);
@@ -99,7 +134,7 @@ public class AutentificationGUI  {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     f.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });

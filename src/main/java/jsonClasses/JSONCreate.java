@@ -7,6 +7,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class JSONCreate {
+    public static void secure(){
+        createCustomerFile();
+        createDriverFile();
+    }
+
     public static void createCustomerFile() {
         JSONObject obj1 = new JSONObject();
         obj1.put("username", "catalin");

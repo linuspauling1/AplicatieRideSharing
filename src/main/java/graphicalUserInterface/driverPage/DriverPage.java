@@ -58,7 +58,7 @@ public class DriverPage {
                         " ?","Confirmare iesire :", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION)
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                else if( result == JOptionPane.NO_OPTION)
+                else
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
@@ -73,7 +73,7 @@ public class DriverPage {
         inapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                new AutentificationGUI();
+                AutentificationGUI.afiseaza();
             }
         });
 
