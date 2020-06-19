@@ -40,6 +40,7 @@ public abstract class User {
             return false;
         }
         try {
+            Integer.parseInt(strNum);
         } catch (NumberFormatException nfe) {
             return false;
         }
