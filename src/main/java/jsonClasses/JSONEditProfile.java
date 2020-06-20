@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class JSONEditProfile {
-    public static void writeDriver(ArrayList<Sofer> soferi){
+    public static void writeDriver(String filename, ArrayList<Sofer> soferi){
         JSONArray list = new JSONArray();
         Iterator<Sofer> it=soferi.iterator();
         while(it.hasNext()){
@@ -27,7 +27,7 @@ public class JSONEditProfile {
             list.add(obj1);
         }
         try {
-            FileWriter file = new FileWriter("src/main/resources/drivers.json");
+            FileWriter file = new FileWriter(filename);
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {

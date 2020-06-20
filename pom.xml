@@ -75,12 +75,19 @@
                             test-report
                         </id>
                         <phase>
-                            post-integration-test
+                            prepare-package
                         </phase>
                         <goals>
                             <goal>
                                 report
                             </goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>post-unit-test</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
                         </goals>
                     </execution>
                 </executions>

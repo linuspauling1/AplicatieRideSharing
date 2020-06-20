@@ -151,7 +151,7 @@ public class EditProfileGUI {
                             JOptionPane.ERROR_MESSAGE);
                 }
                 soferi.add(sof);
-                    JSONEditProfile.writeDriver(soferi);
+                    JSONEditProfile.writeDriver("src/main/resources/drivers.json",soferi);
                     frame.setVisible(false);
                     new DriverPage(sof);
                 }
