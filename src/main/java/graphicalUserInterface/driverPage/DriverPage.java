@@ -26,6 +26,7 @@ public class DriverPage {
     private JButton list;
     private JButton add;
     private JButton inapoi;
+    private boolean b1,b2,b3,b4;
 
     public static Sofer getSofer(){
         return sofer;
@@ -33,6 +34,10 @@ public class DriverPage {
 
     public DriverPage(Sofer s)
     {
+        b1=false;
+        b2=false;
+        b3=false;
+        b4=false;
         ArrayList<Sofer> soferi= JSONEditProfile.getDriver();
         Iterator<Sofer> it=soferi.iterator();
         while(it.hasNext()) {
@@ -73,6 +78,7 @@ public class DriverPage {
         inapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b1=true;
                 AutentificationGUI.afiseaza();
             }
         });
@@ -80,6 +86,7 @@ public class DriverPage {
         list.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b2=true;
                 new VizualizareComenzi(sofer);
             }
         });
@@ -88,6 +95,7 @@ public class DriverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b3=true;
                 ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate(
                         "src/main/resources/completed.xml");
                 Iterator<ComandaEfectuata> it=ef.iterator();
@@ -130,6 +138,7 @@ public class DriverPage {
         edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b4=true;
                 new EditProfileGUI(sofer);
             }
         });
@@ -170,6 +179,41 @@ public class DriverPage {
         frame.getContentPane().add(jp, BorderLayout.CENTER);
         frame.getContentPane().add(west, BorderLayout.WEST);
 
+    }
+    public boolean isB1() {
+        return b1;
+    }
+
+    public boolean isB2() {
+        return b2;
+    }
+
+    public boolean isB3() {
+        return b3;
+    }
+
+    public boolean isB4() {
+        return b4;
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    public JButton getEdit() {
+        return edit;
+    }
+
+    public JButton getList() {
+        return list;
+    }
+
+    public JButton getAdd() {
+        return add;
+    }
+
+    public JButton getInapoi() {
+        return inapoi;
     }
 
 }

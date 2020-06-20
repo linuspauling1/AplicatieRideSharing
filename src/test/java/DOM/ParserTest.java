@@ -66,7 +66,7 @@ public class ParserTest {
     @Test
     public void createXMLEfectuate() throws Exception {
         Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
-        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate("src/main/resources/data.xml");
+        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate("src/main/resources/completed.xml");
         assertEquals(comenziFinale.get(comenziFinale.size() - 1),ce);
     }
 
