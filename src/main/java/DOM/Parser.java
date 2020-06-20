@@ -421,8 +421,9 @@ public class Parser {
                 }
             if(!found)
                 throw new ComandaEfectuataInexistanta();
+            else{
             for(ComandaEfectuata tmp:efectuate)
-                adaugareInformatiiXMLEfectuate(tmp);
+                adaugareInformatiiXMLEfectuate(tmp);}
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
