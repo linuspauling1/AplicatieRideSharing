@@ -131,8 +131,8 @@ public class InfoClient {
                         comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
                         comanda.getSecunda(),comanda.getLocatie(),comanda.getDestinatie(),
                         DriverPage.getSofer(), distanta * 3, distanta);
-                Parser.deleteEfectuate(ce);
-                Parser.createXMLEfectuate(ce);
+                Parser.deleteEfectuate(ce,"src/main/resources/completed.xml");
+                Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
                 frame.setVisible(false);
                 new InfoCalatorie(distanta);
             }

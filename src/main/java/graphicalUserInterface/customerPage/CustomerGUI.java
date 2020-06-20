@@ -25,24 +25,49 @@ public class CustomerGUI {
     private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
+    private static boolean flagFunction;
+    private static boolean flagFunction0;
+    private static boolean flagFunction1;
+    private static boolean flagFunction2;
+
+    public static boolean isFlagFunction0() {
+        return flagFunction0;
+    }
+
+    public static boolean isFlagFunction1() {
+        return flagFunction1;
+    }
+
+    public static boolean isFlagFunction() {
+        return flagFunction;
+    }
+
+    public static boolean isFlagFunction2() {
+        return flagFunction2;
+    }
 
     public static void afiseaza(){
+        flagFunction = true;
         f.setVisible(true);
     }
-    public static boolean activ(){return f.isActive();}
+    public static boolean activ(){
+        flagFunction0 = true;
+        return f.isActive();
+    }
     public static void ascunde(){
+        flagFunction1 = true;
         f.setVisible(false);
     }
-    public boolean find(){
-        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
+    public boolean find(String filename){
+        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata(filename);
         for(ComandaNepreluata tmp: aux)
             if(tmp.getClient().equals(client)&&CommandGUI.verificaData(tmp)==true)
                 return true;
         return false;
     }
 
-    public boolean check(){
-        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate();
+    public boolean check(String fileName){
+        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate(fileName);
         for(ComandaEfectuata tmp: aux)
             if(tmp.getClient().equals(client)&&tmp.getDistanta()==0)
                 return true;
@@ -106,9 +131,9 @@ public class CustomerGUI {
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 f.setVisible(false);
-                if(find())
+                if(find("src/main/resources/data.xml"))
                     new CommandGUI(client);
-                else if(check())
+                else if(check("src/main/resources/completed.xml"))
                     new CompletedGUI(client);
                 else
                     new ComandaNoua(client);
@@ -132,6 +157,7 @@ public class CustomerGUI {
     }
 
     public static void setOcupat(Client ocupat) {
+        flagFunction2 = true;
         CustomerGUI.ocupat = ocupat;
     }
 }

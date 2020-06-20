@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><comenzi status="nepreluate"><comanda><userClient>dana</userClient><destinatie>budapesta</destinatie><loc>timisoara</loc><data><an>2000</an><luna>12</luna><zi>31</zi><ora>23</ora><minut>59</minut><secunda>59</secunda></data></comanda><comanda><userClient>cosmin</userClient><destinatie>budapesta</destinatie><loc>timisoara</loc><data><an>2000</an><luna>12</luna><zi>31</zi><ora>23</ora><minut>59</minut><secunda>59</secunda></data></comanda></comenzi>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><comenzi/>

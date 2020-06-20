@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ListaComenzi {
 
@@ -81,8 +79,8 @@ public class ListaComenzi {
                            comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
                            comanda.getSecunda(),comanda.getLocatie(),comanda.getDestinatie(),
                            DriverPage.getSofer(),0,0);
-                   Parser.createXMLEfectuate(ce);
-                   Parser.delete(comanda);
+                   Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
+                   Parser.delete(comanda,"src/main/resources/data.xml");
                    new InfoClient(comanda);
                    frame.setVisible(false);
                }catch (IndexOutOfBoundsException e){

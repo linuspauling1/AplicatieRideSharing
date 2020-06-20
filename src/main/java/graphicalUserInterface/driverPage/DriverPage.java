@@ -88,7 +88,8 @@ public class DriverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate();
+                ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate(
+                        "src/main/resources/completed.xml");
                 Iterator<ComandaEfectuata> it=ef.iterator();
                 boolean c=false;
                 while(it.hasNext()){

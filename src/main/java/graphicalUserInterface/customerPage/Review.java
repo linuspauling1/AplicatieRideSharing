@@ -39,7 +39,8 @@ public class Review {
                 String textRecenzie = textField.getText();
                 String data = textField_1.getText();
                 try{
-                    Parser.addReview(client,data,textRecenzie);
+                    Parser.addReview(client,data,textRecenzie,
+                            "src/main/resources/completed.xml");
                 } catch(Exception exception){
                     JOptionPane.showMessageDialog(frame, "Data incorecta.");
                 }

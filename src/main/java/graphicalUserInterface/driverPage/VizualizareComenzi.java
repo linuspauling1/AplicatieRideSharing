@@ -51,7 +51,8 @@ public class VizualizareComenzi {
         int pret=0;
         Object data [][]=new Object [100][5];
         int contor=0;
-        ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate();
+        ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate(
+                "src/main/resources/completed.xml");
         Iterator<ComandaEfectuata> it=ef.iterator();
         while(it.hasNext()) {
             ComandaEfectuata com = it.next();

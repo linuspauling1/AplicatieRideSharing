@@ -20,7 +20,7 @@ public class CompletedGUI {
 
     public CompletedGUI(Client client) {
         this.client = client;
-        ArrayList<ComandaEfectuata> ce = Parser.getEfectuate();
+        ArrayList<ComandaEfectuata> ce = Parser.getEfectuate("src/main/resources/completed.xml");
         for(ComandaEfectuata tmp: ce)
             if(tmp.getUsernameClient().equals(client.getUsername())){
                 telefon = tmp.getTelefon();

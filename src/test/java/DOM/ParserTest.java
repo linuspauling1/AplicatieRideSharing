@@ -56,68 +56,41 @@ public class ParserTest {
                 0,distanta,review);
     }
 
-    @Test
-    public void citireInformatiiXML() throws Exception {
-    }
-
-    @Test
-    public void afisareXML() throws Exception {
-    }
-
-    @Test
-    public void adaugareInformatiiXML() throws Exception {
-
-    }
-
-    @Test
-    public void getEfectuate() throws Exception {
-    }
-
-    @Test
-    public void getNepreluata() throws Exception {
-    }
-
-    @Test
-    public void citireInformatiiXMLEfectuate() throws Exception {
-    }
-
-    @Test
-    public void adaugareInformatiiXMLEfectuate() throws Exception {
-    }
-
     @Test(expected = Test.None.class)
     public void createXML() throws Exception {
-        Parser.createXML(cn);
-        ArrayList<ComandaNepreluata> comenziFinale = Parser.getNepreluata();
+        Parser.createXML(cn,"src/main/resources/data.xml");
+        ArrayList<ComandaNepreluata> comenziFinale = Parser.getNepreluata("src/main/resources/data.xml");
         assertEquals(comenziFinale.get(comenziFinale.size() - 1),cn);
-
     }
 
     @Test
     public void createXMLEfectuate() throws Exception {
-        Parser.createXMLEfectuate(ce);
-        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate();
+        Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
+        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate("src/main/resources/data.xml");
         assertEquals(comenziFinale.get(comenziFinale.size() - 1),ce);
     }
 
     @Test(expected = ComandaEfectuataInexistanta.class)
     public void addReview() throws Exception {
-        Parser.addReview(client,"","");//testeaza si exceptia
-        if(Parser.getEfectuate() != null) {
-            ComandaEfectuata cmd = Parser.getEfectuate().get(0);
+        Parser.addReview(client,"","",
+                "src/main/resources/completed.xml");//testeaza si exceptia
+        if(Parser.getEfectuate("src/main/resources/data.xml") != null) {
+            ComandaEfectuata cmd = Parser.getEfectuate("src/main/resources/data.xml").get(0);
             String oldReview = cmd.getReview();
-            Parser.addReview(cmd.getClient(), cmd.getFullDate(), "<" + cmd.getReview() + ">");
+            Parser.addReview(cmd.getClient(), cmd.getFullDate(),
+                    "<" + cmd.getReview() + ">","src/main/resources/completed.xml");
             assertNotEquals(cmd.getReview(), oldReview);
-            Parser.addReview(cmd.getClient(), cmd.getFullDate(), oldReview);
+            Parser.addReview(cmd.getClient(), cmd.getFullDate(), oldReview,
+                    "src/main/resources/dcompleted.xml");
             assertEquals(cmd.getReview(), oldReview);
         }
     }
 
     @Test
     public void delete() throws Exception {
-        Parser.delete(cn);
+        Parser.delete(cn,"src/main/resources/data.xml");
         boolean flag = false;
-        ArrayList<ComandaNepreluata> comenziFinale = Parser.getNepreluata();
+        ArrayList<ComandaNepreluata> comenziFinale = Parser.getNepreluata("src/main/resources/data.xml");
         for(ComandaNepreluata tmp: comenziFinale){
             if(tmp.equals(cn))
                 flag = true;}
@@ -126,14 +99,15 @@ public class ParserTest {
 
     @Test
     public void deleteEfectuate() throws Exception {
-        Parser.deleteEfectuate(ce);
+        Parser.deleteEfectuate(ce,"src/main/resources/completed.xml");
         boolean flag = false;
-        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate();
+        ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate("src/main/resources/data.xml");
         if(comenziFinale != null){
             for(ComandaEfectuata tmp: comenziFinale){
-                if(tmp.equals(ce))
+                if(tmp.getPret() == ce.getPret())
                     flag = true;}
         }
+        assertFalse(flag);
     }
 
     @Test
@@ -142,9 +116,15 @@ public class ParserTest {
         assertTrue(parser instanceof Parser);
     }
 
+    @Test
+    public void testAfisare() {
+        Parser.afisareXML();
+        assertEquals(Parser.isFlag(),true);
+    }
+
     @After
-    public void afterClass() throws Exception {
-        Parser.delete(cn);
-        Parser.deleteEfectuate(ce);
+    public void afterMethod() throws Exception {
+        Parser.delete(cn,"src/main/resources/data.xml");
+        Parser.deleteEfectuate(ce,"src/main/resources/completed.xml");
     }
 }

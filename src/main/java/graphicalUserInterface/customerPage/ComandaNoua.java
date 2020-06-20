@@ -145,7 +145,7 @@ public class ComandaNoua {
 				destinatie = textField_1.getText();
 				ComandaNepreluata cn = new ComandaNepreluata(client,an,luna,zi,ora,minut,secunda,locatie,destinatie);
 				c.add(cn);
-				DOM.Parser.createXML(cn);
+				DOM.Parser.createXML(cn,"src/main/resources/data.xml");
 				frame.setVisible(false);
 				new CommandGUI(client);
 				textField.setText("");

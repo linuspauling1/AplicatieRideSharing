@@ -23,7 +23,7 @@ public class ComenzileMele {
 
     public ComenzileMele(Client client) {
         this.client = client;
-        comandaDeAfisat = Parser.getEfectuate();
+        comandaDeAfisat = Parser.getEfectuate("src/main/resources/completed.xml");
         if (comandaDeAfisat != null) {
             int i = 0,size = 0;
             for (ComandaEfectuata tmp : comandaDeAfisat) {

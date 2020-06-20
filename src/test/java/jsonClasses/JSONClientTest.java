@@ -21,8 +21,6 @@ public class JSONClientTest {
         assertEquals(null,JSONClient.findClient(tmp.toString()));
         if(JSONClient.getClient().get(0) != null) {
             Client cl = JSONClient.getClient().get(0);
-            System.out.println(JSONClient.getClient().get(0));
-            System.out.println(JSONClient.findClient("catalin"));
             assertEquals(JSONClient.findClient(cl.getUsername()),cl);
         }
     }
