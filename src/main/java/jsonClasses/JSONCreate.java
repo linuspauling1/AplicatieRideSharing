@@ -8,11 +8,11 @@ import java.io.IOException;
 
 public class JSONCreate {
     public static void secure(){
-        createCustomerFile();
-        createDriverFile();
+        createCustomerFile("src/main/resources/customers.json");
+        createDriverFile("src/main/resources/drivers.json");
     }
 
-    public static void createCustomerFile() {
+    public static void createCustomerFile(String filename) {
         JSONObject obj1 = new JSONObject();
         obj1.put("username", "catalin");
         obj1.put("password", JSONFile.encrypt("botean"));
@@ -65,14 +65,14 @@ public class JSONCreate {
         list.add(obj9);
         list.add(obj10);
         try {
-            FileWriter file = new FileWriter("src/main/resources/customers.json");
+            FileWriter file = new FileWriter(filename);
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public static void createDriverFile() {
+    public static void createDriverFile(String filename) {
         JSONObject obj1 = new JSONObject();
         obj1.put("username", "alex");
         obj1.put("password", JSONFile.encrypt("borza"));
@@ -116,7 +116,7 @@ public class JSONCreate {
         list.add(obj8);
         list.add(obj9);
         try {
-            FileWriter file = new FileWriter("src/main/resources/drivers.json");
+            FileWriter file = new FileWriter(filename);
             file.write(list.toJSONString());
             file.flush();
         } catch (IOException e) {
