@@ -44,7 +44,7 @@ public class JSONFile {
             Reader reader=new FileReader(fileName);
             list=(JSONArray)parser.parse(reader);
         }catch(IOException e){
-            e.printStackTrace();
+            System.out.println();
         }catch(ParseException e){
             e.printStackTrace();
         }
