@@ -12,6 +12,7 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class CustomerGUITest {
 
@@ -49,38 +50,64 @@ public class CustomerGUITest {
     }
 
     @Test
-    public void afiseaza() {
+    public void afiseaza() throws Exception {
         cgui.afiseaza();
         assertEquals(cgui.isFlagFunction(),true);
     }
 
     @Test
-    public void activ() {
+    public void activ() throws Exception {
         cgui.activ();
         assertEquals(cgui.isFlagFunction0(),true);
     }
 
     @Test
-    public void ascunde() {
+    public void ascunde() throws Exception {
         cgui.ascunde();
         assertEquals(cgui.isFlagFunction1(),true);
     }
 
     @Test
-    public void find() {
+    public void find() throws Exception {
         assertEquals(cgui.find("src/test/resources/data.xml"),true);
     }
 
     @Test
-    public void check() {
+    public void check()  throws Exception {
         cgui = new CustomerGUI(client0);
         assertEquals(cgui.check("src/test/resources/completed.xml"),true);
     }
 
     @Test
-    public void setOcupat() {
+    public void setOcupat()  throws Exception {
         cgui.setOcupat(client);
         assertEquals(cgui.isFlagFunction2(),true);
+    }
+
+    @Test
+    public void testButoon1() {
+        cgui.getB1().doClick();
+        assertTrue(cgui.isFlag1());
+    }
+
+    @Test
+    public void testButoon2() {
+        cgui.getB2().doClick();
+        assertTrue(cgui.isFlag2());
+    }
+
+    @Test
+    public void testButoon3() {
+        cgui.getB3().doClick();
+        assertTrue(cgui.isFlag3());
+    }
+
+    @Test
+    public void testButoon4() {
+        try {
+            cgui.getB4().doClick();
+        } catch (NullPointerException e){}
+        assertTrue(cgui.isFlag4());
     }
 
     /*@After

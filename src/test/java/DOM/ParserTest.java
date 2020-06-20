@@ -111,13 +111,13 @@ public class ParserTest {
     }
 
     @Test
-    public void testConstructor() {
+    public void testConstructor() throws Exception {
         Parser parser = new Parser();
         assertTrue(parser instanceof Parser);
     }
 
     @Test
-    public void testAfisare() {
+    public void testAfisare() throws Exception {
         Parser.afisareXML();
         assertEquals(Parser.isFlag(),true);
     }

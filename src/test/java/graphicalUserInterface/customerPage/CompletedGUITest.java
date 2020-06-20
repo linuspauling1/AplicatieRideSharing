@@ -64,7 +64,7 @@ public class CompletedGUITest {
     }
 
     @After
-    public void again() {
+    public void again()  throws Exception {
         Parser.deleteEfectuate(cn0,"src/main/resources/completed.xml");
     }
 }

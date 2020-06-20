@@ -25,6 +25,7 @@ public class CustomerGUI {
     private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
+    private boolean flag1,flag2,flag3,flag4;
     private static boolean flagFunction;
     private static boolean flagFunction0;
     private static boolean flagFunction1;
@@ -44,6 +45,38 @@ public class CustomerGUI {
 
     public static boolean isFlagFunction2() {
         return flagFunction2;
+    }
+
+    public boolean isFlag1() {
+        return flag1;
+    }
+
+    public boolean isFlag2() {
+        return flag2;
+    }
+
+    public boolean isFlag3() {
+        return flag3;
+    }
+
+    public boolean isFlag4() {
+        return flag4;
+    }
+
+    public JButton getB1() {
+        return b1;
+    }
+
+    public JButton getB2() {
+        return b2;
+    }
+
+    public JButton getB3() {
+        return b3;
+    }
+
+    public JButton getB4() {
+        return b4;
     }
 
     public static void afiseaza(){
@@ -82,6 +115,7 @@ public class CustomerGUI {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag1 = true;
                 f.setVisible(false);
                 new ComenzileMele(c);
             }
@@ -91,6 +125,7 @@ public class CustomerGUI {
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag3 = true;
                 f.setVisible(false);
                 new Review(c);
             }
@@ -107,6 +142,7 @@ public class CustomerGUI {
         b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag4 = true;
                 f.setVisible(false);
                 AutentificationGUI.afiseaza();
             }
@@ -130,6 +166,7 @@ public class CustomerGUI {
         f.add(b4);
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flag2 = true;
                 f.setVisible(false);
                 if(find("src/main/resources/data.xml"))
                     new CommandGUI(client);

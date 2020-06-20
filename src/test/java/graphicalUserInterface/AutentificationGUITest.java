@@ -18,25 +18,25 @@ public class AutentificationGUITest {
     }
 
     @Test
-    public void testFlagB() {
+    public void testFlagB() throws Exception {
         agui.setFlagB(true);
         assertEquals(agui.isFlagB(),true);
     }
 
     @Test
-    public void testFlagVerificaCredentiale1() {
+    public void testFlagVerificaCredentiale1() throws Exception {
         agui.setFlagVerificaCredentiale1(true);
         assertEquals(agui.isFlagVerificaCredentiale1(),true);
     }
 
     @Test
-    public void testFlagVerificaCredentiale2() {
+    public void testFlagVerificaCredentiale2() throws Exception {
         agui.setFlagVerificaCredentiale2(true);
         assertEquals(agui.isFlagVerificaCredentiale2(),true);
     }
 
     @Test
-    public void testFlagFunction() {
+    public void testFlagFunction() throws Exception {
         agui.setFlagFunction(true);
         assertEquals(agui.isFlagFunction(),false);
     }
@@ -49,7 +49,7 @@ public class AutentificationGUITest {
     }
 
     @Test
-    public void afiseaza() {
+    public void afiseaza() throws Exception {
         agui.afiseaza();
         assertEquals(agui.isFlagFunction(),true);
     }
@@ -65,7 +65,7 @@ public class AutentificationGUITest {
     }
 
     @Test
-    public void testAutentificationGUI2() {
+    public void testAutentificationGUI2() throws Exception {
         agui.getT1().setText("alex");
         agui.getT2().setText("borza");
         agui.getB().doClick();
@@ -75,7 +75,7 @@ public class AutentificationGUITest {
     }
 
     @Test
-    public void testAtutntificationGUI3() {
+    public void testAtutntificationGUI3() throws Exception {
         agui.getT1().setText("");
         agui.getT2().setText("");
         assertEquals(agui.isFlagVerificaCredentiale1(),false);
