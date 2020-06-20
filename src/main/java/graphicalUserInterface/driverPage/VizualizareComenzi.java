@@ -18,10 +18,17 @@ public class VizualizareComenzi {
     private JFrame frame;
     private JTable table_1;
     private Sofer sofer;
+    private boolean b=false;
+    private JButton btnNewButton;
 
-    /**
-     * Create the application.
-     */
+    public JButton getBtnNewButton() {
+        return btnNewButton;
+    }
+
+    public boolean isB() {
+        return b;
+    }
+
     public VizualizareComenzi(Sofer sofer) {
         this.sofer=sofer;
         initialize();
@@ -105,7 +112,7 @@ public class VizualizareComenzi {
         lblNewLabel.setBounds(436, 5, 63, 24);
         panel.add(lblNewLabel);
 
-        JButton btnNewButton = new JButton("Inapoi");
+        btnNewButton = new JButton("Inapoi");
         btnNewButton.setFont(new Font("Times New Roman", Font.BOLD, 18));
         btnNewButton.setForeground(new Color(0, 0, 128));
         btnNewButton.setBounds(251, 318, 173, 21);
@@ -113,6 +120,7 @@ public class VizualizareComenzi {
 
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                b=true;
                 frame.dispose();
                 DriverPage.afiseaza();
             }
