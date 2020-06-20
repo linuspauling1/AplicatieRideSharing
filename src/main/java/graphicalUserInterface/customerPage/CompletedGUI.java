@@ -16,7 +16,38 @@ public class CompletedGUI {
 
     private JFrame frame;
     private Client client;
-    private String telefon,numarInmatriculare,usernameSofer;
+    private String telefon;
+    private String numarInmatriculare;
+    private boolean flagInainte;
+    private boolean flagInapoi;
+    private JButton btnInapoi;
+    private JButton btnInainte;
+
+    public JButton getBtnInapoi() {
+        return btnInapoi;
+    }
+
+    public JButton getBtnInainte() {
+        return btnInainte;
+    }
+
+    public boolean isFlagInainte() {
+        return flagInainte;
+    }
+
+    public boolean isFlagInapoi() {
+        return flagInapoi;
+    }
+
+    public String getNumarInmatriculare() {
+        return numarInmatriculare;
+    }
+
+    public String getUsernameSofer() {
+        return usernameSofer;
+    }
+
+    private String usernameSofer;
 
     public CompletedGUI(Client client) {
         this.client = client;
@@ -73,9 +104,10 @@ public class CompletedGUI {
         label_1.setBounds(453, 213, 196, 44);
         frame.getContentPane().add(label_1);
 
-        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi = new JButton("Inapoi");
         btnInapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flagInapoi = true;
                 frame.setVisible(false);
                 CustomerGUI.afiseaza();
             }
@@ -83,10 +115,11 @@ public class CompletedGUI {
         btnInapoi.setBounds(175, 287, 115, 44);
         frame.getContentPane().add(btnInapoi);
 
-        JButton btnInainte = new JButton("Inainte");
+        btnInainte = new JButton("Inainte");
         btnInainte.setBounds(389, 288, 115, 42);
         btnInainte.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flagInainte = true;
                 frame.setVisible(false);
                 new ComandaNoua(client);
             }

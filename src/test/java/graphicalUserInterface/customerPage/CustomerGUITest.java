@@ -12,13 +12,13 @@ import org.junit.Test;
 import java.util.Calendar;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 
 public class CustomerGUITest {
 
     private CustomerGUI cgui;
     private Client client,client0;
-    private ComandaNepreluata cn,cn0;
+    private ComandaNepreluata cn;
+    private ComandaEfectuata cn0;
     private int an;
     private int luna;
     private int zi;
@@ -44,6 +44,7 @@ public class CustomerGUITest {
         cn = new ComandaNepreluata(client,an,luna,zi,ora,minut,secunda,
                 "tm","ar");
         Parser.createXML(cn,"src/test/resources/data.xml");
+        Parser.createXMLEfectuate(cn0,"src/test/resources/completed.xml");
         cgui = new CustomerGUI(client);
     }
 
@@ -73,7 +74,7 @@ public class CustomerGUITest {
     @Test
     public void check() {
         cgui = new CustomerGUI(client0);
-        assertNotEquals(cgui.check("src/test/resources/completed.xml"),true);
+        assertEquals(cgui.check("src/test/resources/completed.xml"),true);
     }
 
     @Test
