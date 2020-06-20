@@ -129,10 +129,11 @@ public class ParserTest {
         Parser.deleteEfectuate(ce);
         boolean flag = false;
         ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate();
-        for(ComandaEfectuata tmp: comenziFinale){
-            if(tmp.equals(ce))
-                flag = true;}
-        assertFalse(flag);
+        if(comenziFinale != null){
+            for(ComandaEfectuata tmp: comenziFinale){
+                if(tmp.equals(ce))
+                    flag = true;}
+        }
     }
 
     @Test
