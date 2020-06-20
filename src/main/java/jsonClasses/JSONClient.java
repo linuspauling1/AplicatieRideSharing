@@ -1,6 +1,5 @@
 package jsonClasses;
 
-import Exceptions.CNPException;
 import dataStructures.Client;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -18,10 +17,8 @@ public class JSONClient {
             JSONObject objInt = (JSONObject) obj.get("customer :");
             Client c = new Client((String)objInt.get("username"),(String)objInt.get("password"));
             c.setAdresa((String)objInt.get("Adresa"));
-            try {
+
                 c.setCNP((String)objInt.get("CNP"));
-            } catch (CNPException e) {
-            }
             c.setTelefon((String)objInt.get("Telefon"));
             clienti.add(c);
         }

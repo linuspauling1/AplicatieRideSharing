@@ -1,5 +1,4 @@
 package graphicalUserInterface.driverPage;
-import Exceptions.CNPException;
 import dataStructures.Sofer;
 import jsonClasses.JSONEditProfile;
 import jsonClasses.JSONFile;
@@ -22,6 +21,42 @@ public class EditProfileGUI {
     private JTextField nri;
     private JTextField car;
     private Sofer sofer;
+    private JButton btnSalveazaModificari;
+    private JButton btnInapoi;
+    private boolean b1=false;
+    private boolean b2=false;
+
+    public JButton getBtnSalveazaModificari() {
+        return btnSalveazaModificari;
+    }
+
+    public JButton getBtnInapoi() {
+        return btnInapoi;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JTextField getCnp() {
+        return cnp;
+    }
+
+    public JTextField getNri() {
+        return nri;
+    }
+
+    public JTextField getCar() {
+        return car;
+    }
+
+    public boolean isB1() {
+        return b1;
+    }
+
+    public boolean isB2() {
+        return b2;
+    }
 
     public EditProfileGUI(Sofer s) {
         sofer=s;
@@ -72,6 +107,7 @@ public class EditProfileGUI {
         passwordField = new JPasswordField();
         passwordField.setBounds(94, 115, 96, 19);
         frame.getContentPane().add(passwordField);
+        passwordField.setText(sofer.getPassword());
 
         cnp = new JTextField();
         cnp.setBounds(94, 162, 96, 19);
@@ -107,18 +143,19 @@ public class EditProfileGUI {
         car.setColumns(10);
         car.setText(sofer.getMasina());
 
-        JButton btnSalveazaModificari = new JButton("Salveaza modificari");
+        btnSalveazaModificari = new JButton("Salveaza modificari");
         btnSalveazaModificari.setFont(new Font("Times New Roman", Font.BOLD, 12));
         btnSalveazaModificari.setBounds(260, 218, 147, 32);
         frame.getContentPane().add(btnSalveazaModificari);
 
-        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi = new JButton("Inapoi");
         btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 12));
         btnInapoi.setBounds(103, 218, 147, 32);
         frame.getContentPane().add(btnInapoi);
 
         btnSalveazaModificari.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                    b2=true;
                     ArrayList<Sofer> soferi = JSONEditProfile.getDriver();
                     soferi.remove(sofer);
                     String nume, parola, CNP, masina, nr;
@@ -141,15 +178,7 @@ public class EditProfileGUI {
                     Sofer sof = new Sofer(nume, parola);
                     sof.setNumarInmatriculare(nr);
                     sof.setMasina(masina);
-                try {
                     sof.setCNP(CNP);
-                } catch (CNPException cnpException) {
-                    Component frame = null;
-                    JOptionPane.showMessageDialog(frame,
-                            "CNP-ul este invalid",
-                            "eroare la conectare",
-                            JOptionPane.ERROR_MESSAGE);
-                }
                 soferi.add(sof);
                     JSONEditProfile.writeDriver("src/main/resources/drivers.json",soferi);
                     frame.setVisible(false);
@@ -159,6 +188,7 @@ public class EditProfileGUI {
 
         btnInapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                b1=true;
                 frame.dispose();
                 DriverPage.afiseaza();
             }

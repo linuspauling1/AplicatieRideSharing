@@ -1,6 +1,5 @@
 package jsonClasses;
 
-import Exceptions.CNPException;
 import dataStructures.Sofer;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -43,10 +42,9 @@ public class JSONEditProfile {
             JSONObject objInt = (JSONObject) obj.get("customer :");
             Sofer s=new Sofer((String)objInt.get("username"),(String)objInt.get("password"));
             s.setMasina((String)objInt.get("Masina"));
-            try {
+
                 s.setCNP((String)objInt.get("CNP"));
-            } catch (CNPException e) {
-            }
+
             s.setNumarInmatriculare((String)objInt.get("NumarInmatriculare"));
             soferi.add(s);
         }

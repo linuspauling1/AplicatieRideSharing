@@ -1,6 +1,5 @@
 package dataStructures;
 
-import Exceptions.CNPException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -46,21 +45,6 @@ public class ClientTest {
         assertEquals(client.getCNP(),CNP);
     }
 
-    @Test(expected = CNPException.class)
-    public void setCNP() throws Exception {
-        client.setCNP(alfanumeric);
-        assertEquals(client.isFlag(),true);
-        client.setCNP(altCNP);
-        assertNotEquals(client.getCNP(),CNP);
-    }
-
-    @Test
-    public void testIsNumeric() throws Exception {
-        assertEquals(client.isNumeric(alfanumeric),false);
-        assertEquals(client.isNumeric(CNP),true);
-        assertNotEquals(client.isNumeric(null),true);
-    }
-
     @Test
     public void setTelefon() throws Exception {
         client.setTelefon(altTelefon);
@@ -94,8 +78,4 @@ public class ClientTest {
         assertNotEquals(client,null);
     }
 
-    @Test
-    public void testIsFlag() {
-        assertNotNull(client.isFlag());
-    }
 }
