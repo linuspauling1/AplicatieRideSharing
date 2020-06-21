@@ -24,6 +24,9 @@ public class ComandaNoua {
 	private String locatie;
 	private String destinatie;
 	private static ArrayList<ComandaNepreluata> c = new ArrayList<ComandaNepreluata>();
+	private boolean b3=false;
+	private JButton btnContinuare;
+	private JButton btnInapoi;
 
 	public ComandaNoua(Client c) {
 		client = c;
@@ -36,6 +39,26 @@ public class ComandaNoua {
 	}
 	public static void ascunde(){
 		frame.setVisible(false);
+	}
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public JTextField getTextField_1() {
+		return textField_1;
+	}
+
+	public JButton getBtnContinuare() {
+		return btnContinuare;
+	}
+
+	public JButton getBtnInapoi() {
+		return btnInapoi;
+	}
+
+	public boolean isB3() {
+		return b3;
 	}
 
 	private void initialize() {
@@ -118,15 +141,16 @@ public class ComandaNoua {
 			}
 		});
 
-		JButton btnContinuare = new JButton("Continuare");
+		btnContinuare = new JButton("Continuare");
 		btnContinuare.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnContinuare.setBounds(181, 157, 132, 21);
-		JButton btnInapoi = new JButton("Inapoi");
+		btnInapoi = new JButton("Inapoi");
 		btnInapoi.setFont(new Font("Times New Roman", Font.BOLD, 16));
 		btnInapoi.setBounds(181, 199, 132, 21);
 
 		btnInapoi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				b3=true;
 				ComandaNoua.ascunde();
 				CustomerGUI.afiseaza();
 				textField.setText("");

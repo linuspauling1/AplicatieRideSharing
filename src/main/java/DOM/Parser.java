@@ -357,10 +357,9 @@ public class Parser {
 
             element = doc.createElement("comenzi");
             doc.appendChild(element);
-
             citireInformatiiXML(fileName);
             for(ComandaNepreluata tmp:comenzi)
-                adaugareInformatiiXML(tmp);
+                    adaugareInformatiiXML(tmp);
             adaugareInformatiiXML(c);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
