@@ -37,26 +37,11 @@ public class ReviewTest {
         int secunda = Calendar.getInstance().get(Calendar.SECOND);
         client = JSONClient.getClient().get(2);
         ce = new ComandaEfectuata(client,an,luna,zi,ora,minut,secunda,
-                "tm","ar", JSONEditProfile.getDriver().get(0),0,0);
+                "tm","ar", JSONEditProfile.getDriver().get(0),9,0);
         Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
         CustomerGUI cg = new CustomerGUI(client);
         recenzie = new Review(client);
     }
-
-    /*@Test
-    public void testReview2() {
-        String s = "haha";
-        boolean flag = false;
-        recenzie.getTextField_1().setText(ce.getFullDate());
-        recenzie.getTextField().setText(s);
-        recenzie.getBtnNewButton().doClick();
-        ArrayList<ComandaEfectuata> ce = Parser.getEfectuate(
-                "src/main/resources/completed.xml");
-        for(ComandaEfectuata tmp: ce)
-            if(tmp.getReview().equals(s))
-                flag = true;
-        assertTrue(flag);
-    }*/
 
     @Test
     public void testBack() {

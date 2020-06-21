@@ -484,7 +484,7 @@ public class Parser {
             e.printStackTrace();
         }
     }
-    public static void deleteEfectuate(ComandaEfectuata c,String fileName) {// eliminare din fisier XML
+    public static void deleteEfectuate(String fileName) {// eliminare din fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();

@@ -16,8 +16,24 @@ import java.util.ArrayList;
 public class ListaComenzi {
 
     private JFrame frame;
+
+    public JTextPane getTextPane() {
+        return textPane;
+    }
+
     private JTextPane textPane;
     private ArrayList<ComandaNepreluata> comandaNepreluata;
+    private JButton btnInapoi;
+    private JButton lblNewLabel;
+    private boolean flag1,flag2;
+
+    public JButton getLblNewLabel() {
+        return lblNewLabel;
+    }
+
+    public JButton getBtnInapoi(){
+        return btnInapoi;
+    }
     /**
      * Create the application.
      */
@@ -67,11 +83,12 @@ public class ListaComenzi {
         textPane.setBounds(391, 247, 30, 26);
         frame.getContentPane().add(textPane);
 
-        JButton lblNewLabel = new JButton("Preluati comanda");
+        lblNewLabel = new JButton("Preluati comanda");
         lblNewLabel.setBounds(245, 239, 141, 34);
         frame.getContentPane().add(lblNewLabel);
         lblNewLabel.addActionListener(new ActionListener(){
            public void actionPerformed(ActionEvent ev){
+               flag2 = true;
                int number=Integer.parseInt(textPane.getText());
                try{
                    ComandaNepreluata comanda = comandaNepreluata.get(number - 1);
@@ -88,13 +105,14 @@ public class ListaComenzi {
                }
         }});
 
-        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi = new JButton("Inapoi");
         btnInapoi.setBounds(255, 289, 115, 29);
         frame.getContentPane().add(btnInapoi);
 
         btnInapoi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag1 = true;
                 frame.setVisible(false);
                 DriverPage.afiseaza();
             }
@@ -104,4 +122,11 @@ public class ListaComenzi {
         frame.setVisible(true);
     }
 
+    public boolean isFlag2() {
+        return flag2;
+    }
+
+    public boolean isFlag1() {
+        return flag1;
+    }
 }

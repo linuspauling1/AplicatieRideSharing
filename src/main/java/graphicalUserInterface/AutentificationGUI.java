@@ -230,10 +230,6 @@ public class AutentificationGUI  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new AutentificationGUI();
-            }
-        });
+        new AutentificationGUI();
     }
 }

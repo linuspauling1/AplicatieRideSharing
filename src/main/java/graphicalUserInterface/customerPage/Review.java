@@ -18,15 +18,7 @@ public class Review {
     private JButton btnInapoi;
     private JButton btnNewButton;
     private Client client;
-    private boolean flag1,flag2;
-
-    public JTextArea getTextField() {
-        return textField;
-    }
-
-    public JTextArea getTextField_1() {
-        return textField;
-    }
+    private boolean flag1;
 
     public JButton getBtnInapoi() {
         return btnInapoi;
@@ -39,11 +31,6 @@ public class Review {
     public boolean isFlag1() {
         return flag1;
     }
-
-    public boolean isFlag2() {
-        return flag2;
-    }
-
 
     public Review(Client client) {
         this.client = client;
@@ -69,7 +56,6 @@ public class Review {
                 try{
                     Parser.addReview(client,data,textRecenzie,
                             "src/main/resources/completed.xml");
-                    flag2 = true;
                 } catch(Exception exception){
                     JOptionPane.showMessageDialog(frame, "Data incorecta.");
                 }

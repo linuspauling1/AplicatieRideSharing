@@ -99,7 +99,7 @@ public class ParserTest {
 
     @Test
     public void deleteEfectuate() throws Exception {
-        Parser.deleteEfectuate(ce,"src/main/resources/completed.xml");
+        Parser.deleteEfectuate("src/main/resources/completed.xml");
         boolean flag = false;
         ArrayList<ComandaEfectuata> comenziFinale = Parser.getEfectuate("src/main/resources/data.xml");
         if(comenziFinale != null){
@@ -125,6 +125,6 @@ public class ParserTest {
     @After
     public void afterMethod() throws Exception {
         Parser.delete(cn,"src/main/resources/data.xml");
-        Parser.deleteEfectuate(ce,"src/main/resources/completed.xml");
+        Parser.deleteEfectuate("src/main/resources/completed.xml");
     }
 }
