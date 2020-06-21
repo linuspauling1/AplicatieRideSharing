@@ -14,6 +14,7 @@ public class ComenzileMeleTest {
     @BeforeClass
     public static void beforeClass() throws Exception {
         cm = new ComenzileMele(new Client("vasile","ion"));
+        CustomerGUI cg = new CustomerGUI(new Client("vasile","ion"));
     }
 
     @Test
@@ -25,11 +26,7 @@ public class ComenzileMeleTest {
 
     @Test
     public void testButton() throws Exception {
-        try{
-            cm.getBtnInapoi().doClick();
-        }catch (NullPointerException e){
-
-        }
+        cm.getBtnInapoi().doClick();
         assertTrue(cm.isFlag1());
     }
 }

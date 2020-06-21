@@ -41,6 +41,7 @@ public class CompletedGUITest {
                 "tm","ar", JSONEditProfile.getDriver().get(0),0,0);
         Parser.createXMLEfectuate(cn0,"src/main/resources/completed.xml");
         cgui = new CompletedGUI(client0);
+        CustomerGUI cg = new CustomerGUI(client0);
     }
 
     @Test
@@ -51,15 +52,10 @@ public class CompletedGUITest {
 
     @Test
     public void testButtons() throws Exception {
-        try {
-            cgui.getBtnInapoi().doClick();
-        }catch (Exception e){
-        }
+        cgui.getBtnInapoi().doClick();
         assertEquals(cgui.isFlagInapoi(),true);
-        try {
-            cgui.getBtnInainte().doClick();
-        }catch (Exception e){
-        }
+
+        cgui.getBtnInainte().doClick();
         assertEquals(cgui.isFlagInainte(),true);
     }
 

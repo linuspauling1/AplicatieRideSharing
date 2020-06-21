@@ -15,7 +15,35 @@ public class Review {
     private JFrame frame;
     private JTextArea textField;
     private JTextArea textField_1;
+    private JButton btnInapoi;
+    private JButton btnNewButton;
     private Client client;
+    private boolean flag1,flag2;
+
+    public JTextArea getTextField() {
+        return textField;
+    }
+
+    public JTextArea getTextField_1() {
+        return textField;
+    }
+
+    public JButton getBtnInapoi() {
+        return btnInapoi;
+    }
+
+    public JButton getBtnNewButton() {
+        return btnInapoi;
+    }
+
+    public boolean isFlag1() {
+        return flag1;
+    }
+
+    public boolean isFlag2() {
+        return flag2;
+    }
+
 
     public Review(Client client) {
         this.client = client;
@@ -33,14 +61,15 @@ public class Review {
         lblRecenzii.setBounds(259, 42, 159, 34);
         frame.getContentPane().add(lblRecenzii);
 
-        JButton btnNewButton = new JButton("Salvati\r\n");
+        btnNewButton = new JButton("Salvati\r\n");
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String textRecenzie = textField.getText();
                 String data = textField_1.getText();
+                String textRecenzie = textField.getText();
                 try{
                     Parser.addReview(client,data,textRecenzie,
                             "src/main/resources/completed.xml");
+                    flag2 = true;
                 } catch(Exception exception){
                     JOptionPane.showMessageDialog(frame, "Data incorecta.");
                 }
@@ -52,9 +81,10 @@ public class Review {
 
         frame.getContentPane().add(btnNewButton);
 
-        JButton btnInapoi = new JButton("Inapoi");
+        btnInapoi = new JButton("Inapoi");
         btnInapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flag1 = true;
                 frame.setVisible(false);
                 CustomerGUI.afiseaza();
             }

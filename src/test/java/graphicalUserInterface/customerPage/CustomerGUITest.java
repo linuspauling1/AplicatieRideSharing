@@ -4,8 +4,10 @@ import DOM.Parser;
 import dataStructures.Client;
 import dataStructures.ComandaEfectuata;
 import dataStructures.ComandaNepreluata;
+import graphicalUserInterface.AutentificationGUI;
 import jsonClasses.JSONClient;
 import jsonClasses.JSONEditProfile;
+import jsonClasses.JSONFile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -85,28 +87,28 @@ public class CustomerGUITest {
     }
 
     @Test
-    public void testButoon1() {
+    public void testButon1() throws Exception {
         cgui.getB1().doClick();
         assertTrue(cgui.isFlag1());
     }
 
     @Test
-    public void testButoon2() {
+    public void testButon2()throws Exception {
         cgui.getB2().doClick();
         assertTrue(cgui.isFlag2());
     }
 
     @Test
-    public void testButoon3() {
+    public void testButon3()throws Exception {
         cgui.getB3().doClick();
         assertTrue(cgui.isFlag3());
     }
 
     @Test
-    public void testButoon4() {
-        try {
-            cgui.getB4().doClick();
-        } catch (NullPointerException e){}
+    public void testButon4() throws Exception {
+        JSONFile jf = new JSONFile();
+        AutentificationGUI ag = new AutentificationGUI();
+        cgui.getB4().doClick();
         assertTrue(cgui.isFlag4());
     }
 
