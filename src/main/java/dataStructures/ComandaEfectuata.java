@@ -96,11 +96,4 @@ public class ComandaEfectuata extends ComandaNepreluata {
         }
     }
 
-    public Date getRealDate() {
-        String strNew = fullDate.replace("/", "");
-        for (int i = 4; i < 13; i += 2)
-            if (strNew.charAt(i) != '0')
-                strNew = addChar(strNew, '0', i);
-        return parseDateTime(strNew);
-    }
 }

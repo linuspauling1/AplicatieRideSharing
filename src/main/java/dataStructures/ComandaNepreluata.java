@@ -8,7 +8,6 @@ public class ComandaNepreluata {
     protected int zi;
     protected int ora;
     protected int minut;
-
     protected int secunda;
     protected String locatie;
     protected String destinatie;

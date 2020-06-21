@@ -24,22 +24,75 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class AutentificationGUI  {
-    static JFrame f;
+    private static JFrame f;
     private static final Path DRIVERS_PATH = FileSystemService.getPathToFile("config", "drivers.json");
     private static final Path COMENZI_PATH = FileSystemService.getPathToFile("config", "data.xml");
     private static final Path COM_EFECT_PATH = FileSystemService.getPathToFile("config", "completed.xml");
     private static final Path IMAGE_PATH = FileSystemService.getPathToFile("config", "drive.jpg");
-    JLabel l1,l2,l3,l4,l5;//labels
-    JButton b;//button
-    JTextField t1;//camp nume
-    JPasswordField t2;//camp parola
+    private JLabel l1;
+    private JLabel l2;
+    private JLabel l3;
+    private JLabel l4;
+    private JLabel l5;//labels
+    private JButton b;//button
+    private JTextField t1;//camp nume
+    private JPasswordField t2;//camp parola
+    private boolean flagB;//flag testare aparitie pop-up
+    private boolean flagVerificaCredentiale1;
+    private boolean flagVerificaCredentiale2;
+    private static boolean flagFunction;
+
+    public static boolean isFlagFunction() {
+        return flagFunction;
+    }
+
+    public static void setFlagFunction(boolean flagFunction) {
+        flagFunction = flagFunction;
+    }
+
+    public boolean isFlagVerificaCredentiale1() {
+        return flagVerificaCredentiale1;
+    }
+
+    public void setFlagVerificaCredentiale1(boolean flagVerificaCredentiale1) {
+        this.flagVerificaCredentiale1 = flagVerificaCredentiale1;
+    }
+
+    public boolean isFlagVerificaCredentiale2() {
+        return flagVerificaCredentiale2;
+    }
+
+    public void setFlagVerificaCredentiale2(boolean flagVerificaCredentiale2) {
+        this.flagVerificaCredentiale2 = flagVerificaCredentiale2;
+    }
+
+    public boolean isFlagB() {
+        return flagB;
+    }
+
+    public void setFlagB(boolean flagB) {
+        this.flagB = flagB;
+    }
+
+    public JButton getB() {
+        return b;
+    }
+
+    public JTextField getT1() {
+        return t1;
+    }
+
+    public JPasswordField getT2() {
+        return t2;
+    }
+
     public AutentificationGUI() {
         JSONCreate.secure();
         f = new JFrame("inregistrare");//frame
         f.getContentPane().setBackground(new Color(255, 165, 10));
         l1 = new JLabel("Numele complet:");//eticheta indicatoare camp pentru nume complet
         l2 = new JLabel("Parola:");//eticheta indicatoare camp pentru parola
-        l3 = new JLabel("Welcome to Ride-Sharing app!");//eticheta indicatoare titlu
+        l3 = new JLabel("Welcome to Ride-Sharing app! ");//eticheta indicatoare titlu
         l4 = new JLabel(" Va rugam sa completati spatiile albe");//eticheta indrumare
         b = new JButton("autentificare");//button
         t1 = new JTextField();//camp nume
@@ -47,32 +100,35 @@ public class AutentificationGUI  {
         l3.setBounds(175, 0, 300, 50);
         l3.setFont(new Font("Bernard MT Condensed", Font.ITALIC, 25));
         l3.setForeground(Color.blue);
-        l1.setBounds(405,60, 150,30);
+        l1.setBounds(405,60, 160,30);
         l1.setFont(new Font("Trebuchet MS", Font.BOLD,16));
         t1.setBounds(5, 5, 200, 30);
         t1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-        t1.setForeground(Color.magenta);
+        t1.setForeground(Color.blue);
         l2.setBounds(405,160, 100,30);
         l2.setFont(new Font("Trebuchet MS", Font.BOLD,16));
         t2.setBounds(5, 5, 200, 30);
         b.setBounds(450,270,110,30);//x axis, y axis, width, height
         l4.setBounds(100,50,500,30);
         l4.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-        l4.setForeground(Color.red);
+        l4.setForeground(Color.blue);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String s1 = t1.getText();
                 String s2 = t2.getText();
                 Client c=new Client(s1,s2);
                 Sofer s=new Sofer(s1,s2);
+                flagB = true;
                 resetFields();
                 if(e.getSource() == b) {
                     if(JSONFile.verificaCredentiale("src/main/resources/customers.json",c)) {
                         f.setVisible(false);
+                        flagVerificaCredentiale1 = true;
                         new CustomerGUI(c);
                     }
                     else if(JSONFile.verificaCredentiale("src/main/resources/drivers.json",s)) {
                         f.setVisible(false);
+                        flagVerificaCredentiale2 = true;
                         new DriverPage(s);
                     }
                     else
@@ -149,6 +205,7 @@ public class AutentificationGUI  {
     }
 
     public static void afiseaza(){
+        flagFunction = true;
         f.setVisible(true);
     }
 

@@ -20,12 +20,32 @@ public class ComenzileMele {
     private JFrame frame;
     private JTable table;
     private JScrollPane scrollPane;
+    private boolean flag,flag0,flag1;
+    private JButton btnInapoi;
+
+    public JButton getBtnInapoi(){
+        return btnInapoi;
+    }
+
+    public boolean isFlag(){
+        return flag;
+    }
+
+    public boolean isFlag0(){
+        return flag0;
+    }
+
+    public boolean isFlag1(){
+        return flag1;
+    }
 
     public ComenzileMele(Client client) {
         this.client = client;
-        comandaDeAfisat = Parser.getEfectuate();
+        flag = true;
+        comandaDeAfisat = Parser.getEfectuate("src/main/resources/completed.xml");
         if (comandaDeAfisat != null) {
             int i = 0,size = 0;
+            flag0 = true;
             for (ComandaEfectuata tmp : comandaDeAfisat) {
                 if (tmp.getClient().equals(client)) {
                     ++size;
@@ -53,11 +73,12 @@ public class ComenzileMele {
             frame.getContentPane().add(lblComenzileMele);
 
 
-            JButton btnInapoi = new JButton("Inapoi");
+            btnInapoi = new JButton("Inapoi");
             btnInapoi.setBounds(275, 265, 115, 29);
             btnInapoi.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    flag1 = true;
                     frame.setVisible(false);
                     CustomerGUI.afiseaza();
                 }

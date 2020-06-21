@@ -17,7 +17,8 @@ public class JSONClient {
             JSONObject objInt = (JSONObject) obj.get("customer :");
             Client c = new Client((String)objInt.get("username"),(String)objInt.get("password"));
             c.setAdresa((String)objInt.get("Adresa"));
-            c.setCNP((String)objInt.get("CNP"));
+
+                c.setCNP((String)objInt.get("CNP"));
             c.setTelefon((String)objInt.get("Telefon"));
             clienti.add(c);
         }

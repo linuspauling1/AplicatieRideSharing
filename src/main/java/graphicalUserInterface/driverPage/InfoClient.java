@@ -19,6 +19,31 @@ public class InfoClient {
     private static JFrame frame;
     private ComandaNepreluata comanda;
     private Client client;
+    private boolean b1=false;
+    private boolean b2=false;
+    private JButton btnTerminareComanda;
+    private JButton btnNewButton;
+
+    public Client getClient() {
+        return client;
+    }
+
+    public boolean isB1() {
+        return b1;
+    }
+
+    public boolean isB2() {
+        return b2;
+    }
+
+    public JButton getBtnTerminareComanda() {
+        return btnTerminareComanda;
+    }
+
+    public JButton getBtnNewButton() {
+        return btnNewButton;
+    }
+
     public InfoClient(ComandaNepreluata c) {
         comanda=c;
         initialize();
@@ -27,7 +52,7 @@ public class InfoClient {
     /**
      * Initialize the contents of the frame.
      */
-    private void cautaClient(){
+    public void cautaClient(){
         String nume=comanda.getUsernameClient();
         ArrayList<Client> clienti= JSONClient.getClient();
         Iterator<Client> it=clienti.iterator();
@@ -123,16 +148,17 @@ public class InfoClient {
         lblDestinatie.setBounds(324, 115, 128, 29);
         panel_2.add(lblDestinatie);
 
-        JButton btnTerminareComanda = new JButton("Terminare comanda");
+        btnTerminareComanda = new JButton("Terminare comanda");
         btnTerminareComanda.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                b1=true;
                 int distanta = (int)(Math.random()*5 + 1);
                 ComandaEfectuata ce = new ComandaEfectuata(comanda.getClient(),comanda.getAn(),
                         comanda.getLuna(),comanda.getZi(),comanda.getOra(),comanda.getMinut(),
                         comanda.getSecunda(),comanda.getLocatie(),comanda.getDestinatie(),
                         DriverPage.getSofer(), distanta * 3, distanta);
-                Parser.deleteEfectuate(ce);
-                Parser.createXMLEfectuate(ce);
+                Parser.deleteEfectuate("src/main/resources/completed.xml");
+                Parser.createXMLEfectuate(ce,"src/main/resources/completed.xml");
                 frame.setVisible(false);
                 new InfoCalatorie(distanta);
             }
@@ -180,13 +206,14 @@ public class InfoClient {
         frame.setSize(700, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JButton btnNewButton=new JButton("Inapoi");
+        btnNewButton=new JButton("Inapoi");
         btnNewButton.setForeground(new Color(0,0,128));
         btnNewButton.setFont(new Font("Times New Roman",Font.BOLD,16));
         btnNewButton.setBounds(318,184,140,25);
         panel_2.add(btnNewButton);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                    b2=true;
                     frame.setVisible(false);
                     DriverPage.afiseaza();
             }

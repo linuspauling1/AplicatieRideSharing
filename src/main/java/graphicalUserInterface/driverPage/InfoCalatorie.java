@@ -11,6 +11,16 @@ public class InfoCalatorie {
 
     private JFrame frmInfoCursa;
     private int distanta;
+    private boolean flag;
+    private JButton btnNewButton;
+
+    public JButton getBtnNewButton(){
+        return btnNewButton;
+    }
+
+    public boolean isFlag(){
+        return flag;
+    }
 
     /**
      * Create the application.
@@ -43,10 +53,11 @@ public class InfoCalatorie {
             }
         });
 
-        JButton btnNewButton = new JButton("Inapoi");
+        btnNewButton = new JButton("Inapoi");
         btnNewButton.setBounds(152, 184, 115, 29);
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flag = true;
                 DriverPage.afiseaza();
                 frmInfoCursa.setVisible(false);
             }

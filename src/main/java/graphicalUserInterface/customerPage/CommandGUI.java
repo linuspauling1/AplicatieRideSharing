@@ -19,7 +19,7 @@ public class CommandGUI {
     private JFrame jf;
     private ComandaNepreluata comanda;
     public CommandGUI(Client client){
-        ArrayList<ComandaNepreluata> c= Parser.getNepreluata();
+        ArrayList<ComandaNepreluata> c= Parser.getNepreluata("src/main/resources/data.xml");
         Iterator<ComandaNepreluata>it=c.iterator();
         while(it.hasNext()) {
             ComandaNepreluata cn = it.next();
@@ -41,7 +41,7 @@ public class CommandGUI {
         new Timer(TIME_VISIBLE, new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 jf.dispose();
-                Parser.delete(comanda);
+                Parser.delete(comanda,"src/main/resources/data.xml");
                 if(jf.isActive()||CustomerGUI.activ())
                     ComandaNoua.afiseaza();
             }
@@ -84,7 +84,7 @@ public class CommandGUI {
 
     public static boolean verificaData(ComandaNepreluata c){
          if(calculeazaTimpRamas(c)<0){
-             DOM.Parser.delete(c);
+             DOM.Parser.delete(c,"src/main/resources/data.xml");
              return false;
          }
          return true;

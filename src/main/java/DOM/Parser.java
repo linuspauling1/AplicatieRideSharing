@@ -31,9 +31,12 @@ public class Parser {
     private static ArrayList<ComandaNepreluata> comenzi;
     private static ArrayList<ComandaEfectuata> efectuate;
 
-    public static void citireInformatiiXML() {
+    //"src/main/resources/data.xml"
+
+
+    public static void citireInformatiiXML(String fileName) {
         comenzi = new ArrayList<>();
-        File inputFile = new File("src/main/resources/data.xml");
+        File inputFile = new File(fileName);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -112,8 +115,15 @@ public class Parser {
         }
     }
 
+    private static boolean flag;
+
+    public static boolean isFlag(){
+        return flag;
+    }
+
     public static void afisareXML() {
-        citireInformatiiXML();
+        flag = true;
+        citireInformatiiXML("src/main/resources/data.xml");
         new ListaComenzi(comenzi);
     }
 
@@ -166,19 +176,19 @@ public class Parser {
 
     }
 
-    public static ArrayList<ComandaEfectuata> getEfectuate() {
-        citireInformatiiXMLEfectuate();
+    public static ArrayList<ComandaEfectuata> getEfectuate(String fileName) {
+        citireInformatiiXMLEfectuate(fileName);
         return efectuate;
     }
 
-    public static ArrayList<ComandaNepreluata> getNepreluata(){
-        citireInformatiiXML();
+    public static ArrayList<ComandaNepreluata> getNepreluata(String fileName){
+        citireInformatiiXML(fileName);
         return comenzi;
     }
 
-    public static void citireInformatiiXMLEfectuate(){
+    public static void citireInformatiiXMLEfectuate(String fileName){
         efectuate = new ArrayList<>();
-        File inputFile = new File("src/main/resources/completed.xml");
+        File inputFile = new File(fileName);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder;
         try {
@@ -339,7 +349,7 @@ public class Parser {
         comanda.appendChild(recenzie);
     }
 
-    public static void createXML(ComandaNepreluata c) {// creare fisier XML
+    public static void createXML(ComandaNepreluata c,String fileName) {// creare fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -347,17 +357,16 @@ public class Parser {
 
             element = doc.createElement("comenzi");
             doc.appendChild(element);
-
-            citireInformatiiXML();
+            citireInformatiiXML(fileName);
             for(ComandaNepreluata tmp:comenzi)
-                adaugareInformatiiXML(tmp);
+                    adaugareInformatiiXML(tmp);
             adaugareInformatiiXML(c);
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/main/resources/data.xml");
+            StreamResult streamResult = new StreamResult(fileName);
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -371,7 +380,7 @@ public class Parser {
         }
     }
 
-    public static void createXMLEfectuate(ComandaEfectuata c) {// creare fisier XML
+    public static void createXMLEfectuate(ComandaEfectuata c,String fileName) {// creare fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -380,7 +389,7 @@ public class Parser {
             element = doc.createElement("comenzi");
             doc.appendChild(element);
 
-            citireInformatiiXMLEfectuate();
+            citireInformatiiXMLEfectuate(fileName);
             for(ComandaEfectuata tmp:efectuate)
                 adaugareInformatiiXMLEfectuate(tmp);
             adaugareInformatiiXMLEfectuate(c);
@@ -389,7 +398,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
+            StreamResult streamResult = new StreamResult(fileName);
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -403,7 +412,8 @@ public class Parser {
         }
     }
 
-    public static void addReview(Client client, String fullDate, String recenzie) throws ComandaEfectuataInexistanta {// creare fisier XML
+    public static void addReview(Client client, String fullDate, String recenzie,String fileName)
+            throws ComandaEfectuataInexistanta {// creare fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -412,7 +422,7 @@ public class Parser {
             element = doc.createElement("comenzi");
             doc.appendChild(element);
 
-            citireInformatiiXMLEfectuate();
+            citireInformatiiXMLEfectuate(fileName);
             boolean found = false;
             for(ComandaEfectuata tmp: efectuate)
                 if(tmp.getFullDate().equals(fullDate) & tmp.getClient().equals(client)){
@@ -428,7 +438,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
+            StreamResult streamResult = new StreamResult(fileName);
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -442,7 +452,7 @@ public class Parser {
         }
     }
 
-    public static void delete(ComandaNepreluata c) {// eliminare din fisier XML
+    public static void delete(ComandaNepreluata c,String fileName) {// eliminare din fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -451,7 +461,7 @@ public class Parser {
             element = doc.createElement("comenzi");
             doc.appendChild(element);
 
-            citireInformatiiXML();
+            citireInformatiiXML(fileName);
             for(ComandaNepreluata tmp:comenzi)
                 if(!tmp.equals(c))
                     adaugareInformatiiXML(tmp);
@@ -460,7 +470,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/main/resources/data.xml");
+            StreamResult streamResult = new StreamResult(fileName);
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block
@@ -473,7 +483,7 @@ public class Parser {
             e.printStackTrace();
         }
     }
-    public static void deleteEfectuate(ComandaEfectuata c) {// eliminare din fisier XML
+    public static void deleteEfectuate(String fileName) {// eliminare din fisier XML
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             builder = factory.newDocumentBuilder();
@@ -482,7 +492,7 @@ public class Parser {
             element = doc.createElement("comenzi");
             doc.appendChild(element);
 
-            citireInformatiiXMLEfectuate();
+            citireInformatiiXMLEfectuate(fileName);
             for(ComandaEfectuata tmp:efectuate)
                 if(tmp.getPret() != 0)
                     adaugareInformatiiXMLEfectuate(tmp);
@@ -491,7 +501,7 @@ public class Parser {
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
 
-            StreamResult streamResult = new StreamResult("src/main/resources/completed.xml");
+            StreamResult streamResult = new StreamResult(fileName);
             transformer.transform(source, streamResult);
         } catch (ParserConfigurationException e) {;
             // TODO Auto-generated catch block

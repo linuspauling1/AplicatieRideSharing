@@ -26,6 +26,7 @@ public class DriverPage {
     private JButton list;
     private JButton add;
     private JButton inapoi;
+    private boolean b1,b2,b3,b4;
 
     public static Sofer getSofer(){
         return sofer;
@@ -33,6 +34,10 @@ public class DriverPage {
 
     public DriverPage(Sofer s)
     {
+        b1=false;
+        b2=false;
+        b3=false;
+        b4=false;
         ArrayList<Sofer> soferi= JSONEditProfile.getDriver();
         Iterator<Sofer> it=soferi.iterator();
         while(it.hasNext()) {
@@ -62,17 +67,33 @@ public class DriverPage {
                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             }
         });
-
-        frame.getContentPane().setLayout(new BorderLayout(20, 20));
+        frame.getContentPane().setLayout(null);
         frame.setVisible(true);
 
+        frame.getContentPane().setBackground(new Color(255, 165, 0));
+
+
         edit=new JButton("Editare profil");
+        edit.setForeground(new Color(0, 0, 128));
+        edit.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        edit.setBounds(10, 35, 198, 34);
         list=new JButton("  Comenzile mele");
+        list.setForeground(new Color(0, 0, 128));
+        list.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        list.setBounds(10, 106, 198, 34);
         add=new JButton("Preia o comanda");
+        add.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        add.setForeground(new Color(0, 0, 128));
+        add.setBounds(10, 180, 198, 34);
         inapoi=new JButton("   Inapoi      ");
+        inapoi.setForeground(new Color(0, 0, 128));
+        inapoi.setFont(new Font("Times New Roman", Font.BOLD, 16));
+        inapoi.setBounds(10, 253, 198, 34);
+
         inapoi.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b1=true;
                 AutentificationGUI.afiseaza();
             }
         });
@@ -80,6 +101,7 @@ public class DriverPage {
         list.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b2=true;
                 new VizualizareComenzi(sofer);
             }
         });
@@ -88,7 +110,9 @@ public class DriverPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate();
+                b3=true;
+                ArrayList<ComandaEfectuata> ef=DOM.Parser.getEfectuate(
+                        "src/main/resources/completed.xml");
                 Iterator<ComandaEfectuata> it=ef.iterator();
                 boolean c=false;
                 while(it.hasNext()){
@@ -107,54 +131,41 @@ public class DriverPage {
         });
 
         JPanel titlu=new JPanel();
-        titlu.setLayout(new GridBagLayout());
-        GridBagConstraints gct=new GridBagConstraints();
-        gct.insets=new Insets(30,5,0,5);
+        titlu.setBackground(new Color(0, 0, 128));
+        titlu.setBounds(0, 0, 636, 56);
+        titlu.setLayout(null);
         JLabel lblNewLabel = new JLabel("DRIVER'S PAGE");
-        lblNewLabel.setForeground(Color.BLUE);
-        lblNewLabel.setFont(new Font("Times New Roman", Font.BOLD, 28));
+        lblNewLabel.setBounds(209, 10, 217, 33);
+        lblNewLabel.setForeground(new Color(255, 255, 255));
+        lblNewLabel.setFont(new Font("Showcard Gothic", Font.PLAIN, 28));
         lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        titlu.add(lblNewLabel,gct);
-        frame.getContentPane().add(titlu, BorderLayout.NORTH);
+        titlu.add(lblNewLabel);
+        frame.getContentPane().add(titlu);
 
         JPanel jp=new JPanel();
-        jp.setLayout(new GridBagLayout());
-        GridBagConstraints gc=new GridBagConstraints();
-        gc.insets=new Insets(0,5,25,5);
-        gc.gridx=0;
-        gc.gridy=0;
-        gc.anchor=GridBagConstraints.PAGE_START;
-        jp.add(edit,gc);
+        jp.setBackground(new Color(0, 0, 128));
+        jp.setBounds(370, 87, 218, 329);
+        jp.setLayout(null);
+        jp.add(edit);
         edit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                b4=true;
                 new EditProfileGUI(sofer);
             }
         });
 
-        gc.insets=new Insets(5,5,25,5);
-        gc.gridx=0;
-        gc.gridy=1;
-        gc.anchor=GridBagConstraints.CENTER;
-        jp.add(list,gc);
 
-        gc.insets=new Insets(5,5,25,5);
-        gc.anchor=GridBagConstraints.CENTER;
-        gc.gridx=0;
-        gc.gridy=2;
-        jp.add(add,gc);
+        jp.add(list);
 
-        gc.insets=new Insets(5,5,25,5);
-        gc.anchor=GridBagConstraints.CENTER;
-        gc.gridx=0;
-        gc.gridy=3;
-        jp.add(inapoi,gc);
+        jp.add(add);
+
+        jp.add(inapoi);
 
         JPanel west=new JPanel();
-        west.setLayout(new GridBagLayout());
-        GridBagConstraints gcw=new GridBagConstraints();
-        gcw.insets=new Insets(15,5,5,5);
+        west.setBackground(new Color(255, 255, 255));
+        west.setBounds(80, 50, 260, 260);
         BufferedImage img = null;
         try {
             img = ImageIO.read(new File("src/main/resources/drive.jpg"));
@@ -164,11 +175,47 @@ public class DriverPage {
         JLabel aux=new JLabel();
         Image dimg = img.getScaledInstance(250, 250,Image.SCALE_SMOOTH);
         ImageIcon imageIcon = new ImageIcon(dimg);
+        aux.setBounds(60, 100, 250, 250);
         aux.setIcon(imageIcon);
-        west.add(aux,gcw);
-        frame.getContentPane().add(jp, BorderLayout.CENTER);
-        frame.getContentPane().add(west, BorderLayout.WEST);
+        west.add(aux);
+        frame.getContentPane().add(jp);
+        frame.getContentPane().add(aux);
 
+    }
+    public boolean isB1() {
+        return b1;
+    }
+
+    public boolean isB2() {
+        return b2;
+    }
+
+    public boolean isB3() {
+        return b3;
+    }
+
+    public boolean isB4() {
+        return b4;
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    public JButton getEdit() {
+        return edit;
+    }
+
+    public JButton getList() {
+        return list;
+    }
+
+    public JButton getAdd() {
+        return add;
+    }
+
+    public JButton getInapoi() {
+        return inapoi;
     }
 
 }

@@ -25,24 +25,82 @@ public class CustomerGUI {
     private static JFrame f;
     private JButton b1,b2,b3,b4;
     private JLabel l1,l2;
+    private boolean flag1,flag2,flag3,flag4;
+    private static boolean flagFunction;
+    private static boolean flagFunction0;
+    private static boolean flagFunction1;
+    private static boolean flagFunction2;
+
+    public static boolean isFlagFunction0() {
+        return flagFunction0;
+    }
+
+    public static boolean isFlagFunction1() {
+        return flagFunction1;
+    }
+
+    public static boolean isFlagFunction() {
+        return flagFunction;
+    }
+
+    public static boolean isFlagFunction2() {
+        return flagFunction2;
+    }
+
+    public boolean isFlag1() {
+        return flag1;
+    }
+
+    public boolean isFlag2() {
+        return flag2;
+    }
+
+    public boolean isFlag3() {
+        return flag3;
+    }
+
+    public boolean isFlag4() {
+        return flag4;
+    }
+
+    public JButton getB1() {
+        return b1;
+    }
+
+    public JButton getB2() {
+        return b2;
+    }
+
+    public JButton getB3() {
+        return b3;
+    }
+
+    public JButton getB4() {
+        return b4;
+    }
 
     public static void afiseaza(){
+        flagFunction = true;
         f.setVisible(true);
     }
-    public static boolean activ(){return f.isActive();}
+    public static boolean activ(){
+        flagFunction0 = true;
+        return f.isActive();
+    }
     public static void ascunde(){
+        flagFunction1 = true;
         f.setVisible(false);
     }
-    public boolean find(){
-        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata();
+    public boolean find(String filename){
+        ArrayList<ComandaNepreluata> aux = Parser.getNepreluata(filename);
         for(ComandaNepreluata tmp: aux)
             if(tmp.getClient().equals(client)&&CommandGUI.verificaData(tmp)==true)
                 return true;
         return false;
     }
 
-    public boolean check(){
-        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate();
+    public boolean check(String fileName){
+        ArrayList<ComandaEfectuata> aux = Parser.getEfectuate(fileName);
         for(ComandaEfectuata tmp: aux)
             if(tmp.getClient().equals(client)&&tmp.getDistanta()==0)
                 return true;
@@ -57,6 +115,7 @@ public class CustomerGUI {
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag1 = true;
                 f.setVisible(false);
                 new ComenzileMele(c);
             }
@@ -66,6 +125,7 @@ public class CustomerGUI {
         b3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag3 = true;
                 f.setVisible(false);
                 new Review(c);
             }
@@ -74,7 +134,7 @@ public class CustomerGUI {
         l1 = new JLabel("Customer's page");
         l1.setBounds(225, 0, 300, 50);
         l1.setFont(new Font("Berlin Sans FB Demi",Font.BOLD, 25));
-        l1.setForeground(Color.magenta);
+        l1.setForeground(Color.blue);
         b1.setBounds(350,200,210,30);
         b2.setBounds(350,150,210,30);
         b3.setBounds(350,100,210,30);
@@ -82,6 +142,7 @@ public class CustomerGUI {
         b4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                flag4 = true;
                 f.setVisible(false);
                 AutentificationGUI.afiseaza();
             }
@@ -105,10 +166,11 @@ public class CustomerGUI {
         f.add(b4);
         b2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                flag2 = true;
                 f.setVisible(false);
-                if(find())
+                if(find("src/main/resources/data.xml"))
                     new CommandGUI(client);
-                else if(check())
+                else if(check("src/main/resources/completed.xml"))
                     new CompletedGUI(client);
                 else
                     new ComandaNoua(client);
@@ -132,6 +194,7 @@ public class CustomerGUI {
     }
 
     public static void setOcupat(Client ocupat) {
+        flagFunction2 = true;
         CustomerGUI.ocupat = ocupat;
     }
 }
