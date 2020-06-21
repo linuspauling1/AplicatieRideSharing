@@ -134,7 +134,7 @@ public class CustomerGUI {
         l1 = new JLabel("Customer's page");
         l1.setBounds(225, 0, 300, 50);
         l1.setFont(new Font("Berlin Sans FB Demi",Font.BOLD, 25));
-        l1.setForeground(Color.magenta);
+        l1.setForeground(Color.blue);
         b1.setBounds(350,200,210,30);
         b2.setBounds(350,150,210,30);
         b3.setBounds(350,100,210,30);

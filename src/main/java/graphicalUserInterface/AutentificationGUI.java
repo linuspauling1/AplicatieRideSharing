@@ -92,7 +92,7 @@ public class AutentificationGUI  {
         f.getContentPane().setBackground(new Color(255, 165, 10));
         l1 = new JLabel("Numele complet:");//eticheta indicatoare camp pentru nume complet
         l2 = new JLabel("Parola:");//eticheta indicatoare camp pentru parola
-        l3 = new JLabel("Welcome to Ride-Sharing app!");//eticheta indicatoare titlu
+        l3 = new JLabel("Welcome to Ride-Sharing app! ");//eticheta indicatoare titlu
         l4 = new JLabel(" Va rugam sa completati spatiile albe");//eticheta indrumare
         b = new JButton("autentificare");//button
         t1 = new JTextField();//camp nume
@@ -100,18 +100,18 @@ public class AutentificationGUI  {
         l3.setBounds(175, 0, 300, 50);
         l3.setFont(new Font("Bernard MT Condensed", Font.ITALIC, 25));
         l3.setForeground(Color.blue);
-        l1.setBounds(405,60, 150,30);
+        l1.setBounds(405,60, 160,30);
         l1.setFont(new Font("Trebuchet MS", Font.BOLD,16));
         t1.setBounds(5, 5, 200, 30);
         t1.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 16));
-        t1.setForeground(Color.magenta);
+        t1.setForeground(Color.blue);
         l2.setBounds(405,160, 100,30);
         l2.setFont(new Font("Trebuchet MS", Font.BOLD,16));
         t2.setBounds(5, 5, 200, 30);
         b.setBounds(450,270,110,30);//x axis, y axis, width, height
         l4.setBounds(100,50,500,30);
         l4.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 12));
-        l4.setForeground(Color.red);
+        l4.setForeground(Color.blue);
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String s1 = t1.getText();
@@ -230,6 +230,10 @@ public class AutentificationGUI  {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        new AutentificationGUI();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new AutentificationGUI();
+            }
+        });
     }
 }

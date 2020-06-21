@@ -55,7 +55,6 @@ public class CompletedGUI {
         for(ComandaEfectuata tmp: ce)
             if(tmp.getUsernameClient().equals(client.getUsername())){
                 telefon = tmp.getTelefon();
-                numarInmatriculare = tmp.getNumarInmatriculare();
                 usernameSofer = tmp.getUsernameSofer();
             }
         initialize();
@@ -84,11 +83,6 @@ public class CompletedGUI {
         lblNewLabel.setBounds(46, 177, 392, 34);
         frame.getContentPane().add(lblNewLabel);
 
-        JLabel lblNumarInmatriculare = new JLabel("Numar inmatriculare:");
-        lblNumarInmatriculare.setFont(new Font("Wide Latin", Font.ITALIC, 20));
-        lblNumarInmatriculare.setBounds(46, 227, 392, 44);
-        frame.getContentPane().add(lblNumarInmatriculare);
-
         JLabel lblNewLabel_1 = new JLabel(usernameSofer);
         lblNewLabel_1.setFont(new Font("Wide Latin", Font.PLAIN, 20));
         lblNewLabel_1.setBounds(453, 108, 196, 44);
@@ -99,10 +93,6 @@ public class CompletedGUI {
         label.setBounds(453, 157, 196, 44);
         frame.getContentPane().add(label);
 
-        JLabel label_1 = new JLabel(numarInmatriculare);
-        label_1.setFont(new Font("Wide Latin", Font.PLAIN, 20));
-        label_1.setBounds(453, 213, 196, 44);
-        frame.getContentPane().add(label_1);
 
         btnInapoi = new JButton("Inapoi");
         btnInapoi.addActionListener(new ActionListener() {
